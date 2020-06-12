@@ -1,9 +1,7 @@
 package br.com.projetofcamara.projeto.controller;
 
 import java.util.Optional;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,9 +50,7 @@ public class ClienteController {
 			return new ResponseEntity<>(new UsuarioDto(clienteBd.get()), HttpStatus.OK);
 		}
 		
-		return ResponseEntity.badRequest().body(new UsuarioDto(cliente));
-		
-	
+		return ResponseEntity.badRequest().body(new UsuarioDto(cliente));	
 	}
 	
 	@GetMapping("/{id}")
@@ -68,7 +64,6 @@ public class ClienteController {
 		
 		return ResponseEntity.notFound().build();
 	}
-
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> remover(@PathVariable String id){

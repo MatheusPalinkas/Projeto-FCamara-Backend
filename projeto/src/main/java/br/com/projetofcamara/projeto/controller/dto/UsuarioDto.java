@@ -11,8 +11,7 @@ public class UsuarioDto {
 	private String email;
 	private LocalDate dataNascimento;	
 	private String cpf;
-	private String telefone;
-	
+	private String telefone;	
 
 	public UsuarioDto(Usuario usuario) {
 		
@@ -21,8 +20,7 @@ public class UsuarioDto {
 		this.email = usuario.getEmail();
 		this.dataNascimento = usuario.getDataNascimento();
 		this.cpf = usuario.getCpf();
-		this.telefone = usuario.getTelefone();
-		
+		this.telefone = usuario.getTelefone();		
 	}
 
 	public String getId() {
@@ -47,7 +45,6 @@ public class UsuarioDto {
 
 	public String getTelefone() {
 		return telefone;
-	}
-	
+	}	
 	
 }

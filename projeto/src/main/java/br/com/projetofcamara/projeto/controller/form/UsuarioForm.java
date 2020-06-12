@@ -6,7 +6,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
-
 public class UsuarioForm {
 	
 	@NotNull @NotEmpty 
@@ -21,9 +20,7 @@ public class UsuarioForm {
 	protected String cpf;
 	@NotNull @NotEmpty 
 	protected String telefone;
-	
-	
-	
+		
 	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
@@ -71,6 +68,4 @@ public class UsuarioForm {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
-	
 }

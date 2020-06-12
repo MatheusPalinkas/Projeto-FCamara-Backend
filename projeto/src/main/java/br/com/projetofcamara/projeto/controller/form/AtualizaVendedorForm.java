@@ -14,5 +14,4 @@ public class AtualizaVendedorForm extends AtualizarUsuarioForm{
 		
 		return vendedor;
 	}
-
 }

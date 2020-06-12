@@ -1,11 +1,9 @@
 package br.com.projetofcamara.projeto.service;
 
-
 import java.util.Optional;
 import br.com.projetofcamara.projeto.entity.Vendedor;
 
-public interface VendedorService {
-	
+public interface VendedorService {	
 		
 	Optional<Vendedor> criarVendedor(Vendedor vendedor);
 	
@@ -16,9 +14,4 @@ public interface VendedorService {
 	Optional<Vendedor> buscarVendedorPeloId(String id);	
 	
 	void excluirVendedor(String id);
-
-	
-	   
-	
-
 }

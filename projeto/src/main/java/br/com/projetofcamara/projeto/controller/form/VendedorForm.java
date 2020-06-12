@@ -3,8 +3,7 @@ package br.com.projetofcamara.projeto.controller.form;
 import br.com.projetofcamara.projeto.entity.Vendedor;
 
 public class VendedorForm extends UsuarioForm{
-	
-	
+		
 	public Vendedor converter() {
 		
 		Vendedor vendedor = new Vendedor();
@@ -16,10 +15,5 @@ public class VendedorForm extends UsuarioForm{
 		vendedor.setTelefone(telefone);	
 		
 		return vendedor;
-	}
-	
-	
-	
-	
-	
+	}		
 }

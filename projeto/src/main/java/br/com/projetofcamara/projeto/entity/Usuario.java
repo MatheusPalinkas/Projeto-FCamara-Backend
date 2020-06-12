@@ -3,9 +3,7 @@ package br.com.projetofcamara.projeto.entity;
 import java.time.LocalDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
-
 import br.com.projetofcamara.projeto.enums.TipoUsuario;
-
 
 public abstract class Usuario {
 	
@@ -40,8 +38,7 @@ public abstract class Usuario {
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
-		
+		this.nome = nome;		
 	}
 	
 	public String getEmail() {
@@ -49,8 +46,7 @@ public abstract class Usuario {
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
-		
+		this.email = email;		
 	}
 
 	public String getSenha() {
@@ -58,8 +54,7 @@ public abstract class Usuario {
 	}
 
 	public void setSenha(String senha) {
-		this.senha = senha;
-		
+		this.senha = senha;		
 	}
 
 	public LocalDate getDataNascimento() {
@@ -67,8 +62,7 @@ public abstract class Usuario {
 	}
 
 	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
-		
+		this.dataNascimento = dataNascimento;		
 	}
 
 	public String getCpf() {
@@ -76,8 +70,7 @@ public abstract class Usuario {
 	}
 
 	public void setCpf(String cpf) {
-		this.cpf = cpf;
-		
+		this.cpf = cpf;		
 	}
 
 	public String getTelefone() {
@@ -85,9 +78,6 @@ public abstract class Usuario {
 	}
 
 	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-		
+		this.telefone = telefone;		
 	}
-	
-
 }

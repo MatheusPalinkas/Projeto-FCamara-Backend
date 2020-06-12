@@ -65,8 +65,5 @@ public class EnderecoDto {
 	public static List<EnderecoDto> converter(Page<Endereco> endereco) {
 		return endereco.stream().map(EnderecoDto::new).collect(Collectors.toList());
 	}
-	
-	
-
-	
+		
 }

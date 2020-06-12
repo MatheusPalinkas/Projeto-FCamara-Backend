@@ -1,15 +1,13 @@
 package br.com.projetofcamara.projeto.service;
 
+import java.util.List;
 import java.util.Optional;
-
-import org.springframework.data.domain.Page;
-
 import br.com.projetofcamara.projeto.entity.Endereco;
-
+import br.com.projetofcamara.projeto.enums.TipoDetentor;
 
 public interface EnderecoService {
 	
-	Page<Endereco> todosOsEnderecos(int pagina, int count);
+	Optional<List<Endereco>> todosOsEnderecos(TipoDetentor detentor, String codigoDetentor);
 	
 	Optional<Endereco> criarEndereco(Endereco endereco);
 	
@@ -17,6 +15,5 @@ public interface EnderecoService {
 
 	Optional<Endereco> buscarEnderecoPeloId(String id);	
 	
-	void excluirEndereco(String id);
-
+	void excluirEndereco(String id);	
 }

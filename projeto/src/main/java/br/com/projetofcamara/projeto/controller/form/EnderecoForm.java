@@ -1,11 +1,8 @@
 package br.com.projetofcamara.projeto.controller.form;
 
-
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
 import br.com.projetofcamara.projeto.entity.Endereco;
-
 
 public class EnderecoForm {
 	
@@ -23,7 +20,8 @@ public class EnderecoForm {
 	private String uf;
 	@NotNull @NotEmpty 
 	private String complemento;
-	
+	@NotNull @NotEmpty
+	private String codigoDetentor;
 	
 	public String getCep() {
 		return cep;
@@ -60,14 +58,20 @@ public class EnderecoForm {
 	}
 	public void setUf(String uf) {
 		this.uf = uf;
-	}
-		
+	}	
 	public String getComplemento() {
 		return complemento;
-	}
+	}	
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
+	}	
+	public String getCodigoDetentor() {
+		return codigoDetentor;
 	}
+	public void setCodigoDetentor(String codigoDetentor) {
+		this.codigoDetentor = codigoDetentor;
+	}	
+	
 	public Endereco converter() {
 		
 		Endereco endereco = new Endereco();	
@@ -78,11 +82,8 @@ public class EnderecoForm {
 		endereco.setUf(uf);
 		endereco.setBairro(bairro);
 		endereco.setCep(cep);
+		endereco.setCodigoDetentor(codigoDetentor);
 		
 		return endereco;
-	}
-	
-	
-	
-	
+	}	
 }

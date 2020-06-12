@@ -2,7 +2,6 @@ package br.com.projetofcamara.projeto.controller.form;
 
 import br.com.projetofcamara.projeto.entity.Cliente;
 
-
 public class AtualizaClienteForm extends AtualizarUsuarioForm{
 
 	public Cliente converter() {
@@ -15,5 +14,4 @@ public class AtualizaClienteForm extends AtualizarUsuarioForm{
 		
 		return cliente;
 	}
-
 }

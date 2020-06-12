@@ -15,9 +15,5 @@ public class ClienteForm extends UsuarioForm{
 		cliente.setTelefone(telefone);	
 		
 		return cliente;
-	}
-	
-	
-	
-	
+	}	
 }

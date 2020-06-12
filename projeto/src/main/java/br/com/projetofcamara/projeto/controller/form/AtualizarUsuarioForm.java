@@ -3,7 +3,6 @@ package br.com.projetofcamara.projeto.controller.form;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-
 public class AtualizarUsuarioForm {
 
 	@NotNull @NotEmpty 
@@ -13,8 +12,6 @@ public class AtualizarUsuarioForm {
 	@NotNull @NotEmpty 
 	protected String telefone;
 	protected String senha;
-	
-	
 	
 	public String getId() {
 		return id;
@@ -39,8 +36,5 @@ public class AtualizarUsuarioForm {
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-	
-	
-	
+	}	
 }

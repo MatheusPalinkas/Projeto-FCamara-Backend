@@ -1,9 +1,9 @@
 package br.com.projetofcamara.projeto.entity;
 
 import org.springframework.data.annotation.Id;
-//import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
-//import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import br.com.projetofcamara.projeto.enums.TipoDetentor;
 
 @Document
 public class Endereco {
@@ -17,7 +17,13 @@ public class Endereco {
 	private String bairro;
 	private String uf;
 	private String complemento;
-
+	private TipoDetentor detentor;
+	private String codigoDetentor;
+	
+	public Endereco(TipoDetentor detentor, String codigoDetentor) {
+		this.detentor = detentor;
+		this.codigoDetentor = codigoDetentor;
+	}
 	
 	public Endereco() {
 		
@@ -87,6 +93,19 @@ public class Endereco {
 		this.complemento = complemento;
 	}
 
-		
-	
+	public TipoDetentor getDetentor() {
+		return detentor;
+	}
+
+	public void setDetentor(TipoDetentor detentor) {
+		this.detentor = detentor;
+	}
+
+	public String getCodigoDetentor() {
+		return codigoDetentor;
+	}
+
+	public void setCodigoDetentor(String codigoDetentor) {
+		this.codigoDetentor = codigoDetentor;
+	}	
 }

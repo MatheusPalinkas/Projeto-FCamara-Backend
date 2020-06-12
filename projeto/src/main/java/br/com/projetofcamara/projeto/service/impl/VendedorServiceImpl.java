@@ -1,6 +1,5 @@
 package br.com.projetofcamara.projeto.service.impl;
 
-
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +48,4 @@ public class VendedorServiceImpl implements VendedorService {
 	public void excluirVendedor(String id) {
 		this.vendedorRepository.deleteById(id);
 	}
-
-	
-	
-
 }

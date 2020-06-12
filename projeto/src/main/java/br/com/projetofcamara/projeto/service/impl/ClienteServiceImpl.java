@@ -1,14 +1,11 @@
 package br.com.projetofcamara.projeto.service.impl;
 
-
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import br.com.projetofcamara.projeto.entity.Cliente;
 import br.com.projetofcamara.projeto.repository.ClienteRepository;
 import br.com.projetofcamara.projeto.service.ClienteService;
-
 
 @Service
 public class ClienteServiceImpl implements ClienteService {
@@ -52,7 +49,4 @@ public class ClienteServiceImpl implements ClienteService {
 	public void excluirCliente(String id) {
 		this.clienteRepository.deleteById(id);
 	}
-
-		
-
 }

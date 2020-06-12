@@ -22,8 +22,7 @@ public class AtualizaEnderecoForm {
 	@NotNull @NotEmpty
 	private String uf;
 	@NotNull @NotEmpty
-	private String complemento;
-	
+	private String complemento;	
 	
 	public String getId() {
 		return id;
@@ -89,7 +88,5 @@ public class AtualizaEnderecoForm {
 		endereco.setUf(uf);
 		
 		return endereco;
-	}
-	
-	
+	}	
 }

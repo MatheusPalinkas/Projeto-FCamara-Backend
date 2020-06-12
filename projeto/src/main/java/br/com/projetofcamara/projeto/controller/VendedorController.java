@@ -1,6 +1,5 @@
 package br.com.projetofcamara.projeto.controller;
 
-
 import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,6 @@ public class VendedorController {
 	@Autowired	
 	VendedorService vendedorService;
 	
-	
 	@PostMapping
 	public ResponseEntity<UsuarioDto> cadastrar(@RequestBody @Valid VendedorForm form) {
 		
@@ -51,8 +49,7 @@ public class VendedorController {
 			return new ResponseEntity<>(new UsuarioDto(vendedorBd.get()), HttpStatus.OK);
 		}
 		
-		return ResponseEntity.badRequest().body(new UsuarioDto(vendedor));	
-	
+		return ResponseEntity.badRequest().body(new UsuarioDto(vendedor));		
 	}	
 	
 	@GetMapping("/{id}")
@@ -67,7 +64,6 @@ public class VendedorController {
 		return ResponseEntity.notFound().build();
 	}
 	
-
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> remover(@PathVariable String id){
 		
