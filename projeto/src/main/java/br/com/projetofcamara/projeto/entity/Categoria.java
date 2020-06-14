@@ -17,6 +17,9 @@ public class Categoria {
 	public Categoria() {
 		this.ativo = true;
 	}
+	public Categoria(String id) {
+		this.id = id;
+	}
 	public String getId() {
 		return id;
 	}
