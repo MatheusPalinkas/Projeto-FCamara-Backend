@@ -1,5 +1,6 @@
 package br.com.projetofcamara.projeto.entity;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import org.springframework.data.annotation.Id;
@@ -17,16 +18,22 @@ public class Comercio {
 	private String cnpj;
 	private String valorEntrega;
 	private String tempoEntrega;
+	private LocalDate dataCriacao;
 	private LocalTime horarioAbertura;
 	private LocalTime horarioFechamento;
-	private boolean possuiServicoEntrega = true;
-	private boolean localAtendimento = false;
+	private boolean possuiServicoEntrega;
+	private boolean localAtendimento;
 	private List<FormasPagamento> formasPagamento;
 	@DBRef(lazy = true)
-	private Endereco endereco;	
+	private Endereco endereco;
+	@DBRef
+	private Categoria categoria;
+	
 	
 	public Comercio() {
-		
+		this.possuiServicoEntrega = true;
+		this.localAtendimento = false;
+		this.dataCriacao = LocalDate.now();
 	}
 
 	public String getId() {
@@ -123,6 +130,22 @@ public class Comercio {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public LocalDate getDataCriacao() {
+		return dataCriacao;
+	}
+
+	public void setDataCriacao(LocalDate dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 	
 }
