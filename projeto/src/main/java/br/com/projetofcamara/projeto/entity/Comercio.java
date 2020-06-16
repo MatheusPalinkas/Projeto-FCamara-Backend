@@ -35,7 +35,11 @@ public class Comercio {
 		this.localAtendimento = false;
 		this.dataCriacao = LocalDate.now();
 	}
-
+	
+	public Comercio(String id) {
+		this.id = id;
+	}
+	
 	public String getId() {
 		return id;
 	}
