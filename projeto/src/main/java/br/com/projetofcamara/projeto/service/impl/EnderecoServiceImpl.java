@@ -18,7 +18,10 @@ public class EnderecoServiceImpl implements EnderecoService{
 
 	@Override
 	public Optional<Endereco> criarEndereco(Endereco endereco) {
-		return Optional.ofNullable(enderecoRepository.save(endereco));
+		if(!TipoDetentor.PRODUTO.equals(endereco.getDetentor())){
+			return Optional.ofNullable(enderecoRepository.save(endereco));
+		}
+		return Optional.empty();
 	}
 
 	@Override
