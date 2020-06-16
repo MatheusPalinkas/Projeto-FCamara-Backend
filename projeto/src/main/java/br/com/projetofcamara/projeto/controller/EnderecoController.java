@@ -29,9 +29,9 @@ public class EnderecoController {
 	@Autowired
 	EnderecoService enderecoService;
 	
-	@GetMapping(value= "cliente/{id}" )
-	public ResponseEntity<List<EnderecoDto>> listarEnderecoCliente(@PathVariable String id) {
-		Optional<List<Endereco>> enderecoBanco = enderecoService.todosOsEnderecos(TipoDetentor.CLIENTE, id);
+	@GetMapping(value= "{tipoDetentor}/{id}" )
+	public ResponseEntity<List<EnderecoDto>> listarEndereco(@PathVariable String tipoDetentor, @PathVariable String id) {
+		Optional<List<Endereco>> enderecoBanco = enderecoService.todosOsEnderecos(TipoDetentor.getEnumFromText(tipoDetentor), id);
 	
 		if(enderecoBanco.isPresent()) {
 			List<EnderecoDto> listaDto = new ArrayList<EnderecoDto>();
@@ -43,54 +43,24 @@ public class EnderecoController {
 		}
 
 		return ResponseEntity.notFound().build();
-	}
+	}	
 	
-	@GetMapping(value= "comercio/{id}" )
-	public ResponseEntity<List<EnderecoDto>> listarEnderecoComercio(@PathVariable String id) {
-		Optional<List<Endereco>> enderecoBanco = enderecoService.todosOsEnderecos(TipoDetentor.COMERCIO, id);
-	
-		if(enderecoBanco.isPresent()) {
-			List<EnderecoDto> listaDto = new ArrayList<EnderecoDto>();
-			for (Endereco endereco : enderecoBanco.get()) {
-				listaDto.add(new EnderecoDto(endereco));
-			}			
-
-		return new ResponseEntity<List<EnderecoDto>>( listaDto, HttpStatus.OK );
-		}
-
-	return ResponseEntity.notFound().build();
-	}
-	
-	@PostMapping("/cliente")
-	public ResponseEntity<EnderecoDto> cadastrarEnderecoCliente(@RequestBody @Valid EnderecoForm enderecoForm){
+	@PostMapping("/{tipoDetentor}")
+	public ResponseEntity<EnderecoDto> cadastrarEndereco(@PathVariable String tipoDetentor,@RequestBody @Valid EnderecoForm enderecoForm){
 		
 		Endereco endereco = enderecoForm.converter();
-		endereco.setDetentor(TipoDetentor.CLIENTE);
+		endereco.setDetentor(TipoDetentor.getEnumFromText(tipoDetentor));
 		Optional<Endereco> enderecoBd = enderecoService.criarEndereco(endereco);
 		
-		if(enderecoBd.isPresent()) {
+		if(enderecoBd.isPresent()) {		
 			return new ResponseEntity<>( new EnderecoDto(enderecoBd.get()), HttpStatus.CREATED);
 		}
 		
 		return ResponseEntity.badRequest().body(new EnderecoDto(endereco));
 	}
-	
-	@PostMapping("/comercio")
-	public ResponseEntity<EnderecoDto> cadastrarEnderecoComercio(@RequestBody @Valid EnderecoForm enderecoForm){
 		
-		Endereco endereco = enderecoForm.converter();
-		endereco.setDetentor(TipoDetentor.COMERCIO);
-		Optional<Endereco> enderecoBd = enderecoService.criarEndereco(endereco);
-		
-		if(enderecoBd.isPresent()) {
-			return new ResponseEntity<>( new EnderecoDto(enderecoBd.get()), HttpStatus.CREATED);
-		}
-		
-		return ResponseEntity.badRequest().body(new EnderecoDto(endereco));
-	}
-	
 	@PutMapping
-	public ResponseEntity<EnderecoDto> atualizarEndereco( @RequestBody @Valid AtualizaEnderecoForm form) {
+	public ResponseEntity<EnderecoDto> atualizarEndereco(@RequestBody @Valid AtualizaEnderecoForm form) {
 		
 		Endereco endereco = form.converter();
 		Optional<Endereco> enderecoBd = enderecoService.alterarEndereco(endereco);
