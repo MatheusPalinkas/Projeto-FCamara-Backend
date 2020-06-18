@@ -8,8 +8,6 @@ public interface ClienteService {
 	Optional<Cliente> criarCliente(Cliente cliente);
 	
 	Optional<Cliente> alterarCliente(Cliente cliente);
-	
-	Optional<Cliente> buscarClientePeloEmail(String email);	
 
 	Optional<Cliente> buscarClientePeloId(String id);	
 	

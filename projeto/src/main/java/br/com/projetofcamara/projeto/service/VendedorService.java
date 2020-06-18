@@ -8,8 +8,6 @@ public interface VendedorService {
 	Optional<Vendedor> criarVendedor(Vendedor vendedor);
 	
 	Optional<Vendedor> alterarVendedor(Vendedor vendedor);
-	
-	Optional<Vendedor> buscarVendedorPeloEmail(String email);	
 
 	Optional<Vendedor> buscarVendedorPeloId(String id);	
 	
