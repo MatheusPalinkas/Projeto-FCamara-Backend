@@ -9,6 +9,7 @@ import br.com.projetofcamara.projeto.enums.TipoUsuario;
 @Document("usuario")
 public class Cliente extends Usuario {
 
+	private static final long serialVersionUID = 1L;
 	@DBRef
 	private List<Endereco> endereco;
 	
@@ -22,5 +23,6 @@ public class Cliente extends Usuario {
 
 	public void setEndereco(List<Endereco> endereco) {
 		this.endereco = endereco;
-	}		
+	}
+
 }

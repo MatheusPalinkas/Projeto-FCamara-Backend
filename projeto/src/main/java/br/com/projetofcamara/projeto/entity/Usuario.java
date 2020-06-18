@@ -1,19 +1,29 @@
 package br.com.projetofcamara.projeto.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import br.com.projetofcamara.projeto.enums.TipoUsuario;
 
-public abstract class Usuario {
+public abstract class Usuario implements UserDetails{
 	
+	private static final long serialVersionUID = 1L;
 	@Id 
 	protected String id;
-	protected String nome;
-	@Indexed(unique = true)		
+	protected String nome;	
+	@Indexed(unique = true)
 	protected String email;
 	protected String senha;
-	protected LocalDate dataNascimento;	
+	protected LocalDate dataNascimento;
+	@Indexed(unique = true)
 	protected String cpf;
 	protected String telefone;
 	protected TipoUsuario tipoUsuario;
@@ -79,5 +89,51 @@ public abstract class Usuario {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;		
+	}
+
+	@Override
+	public String getPassword() {
+		
+		return this.senha;
+	}
+
+	@Override
+	public String getUsername() {
+		
+		return this.email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		if(tipoUsuario == null) {
+			return Collections.emptyList();
+		}
+		
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		authorities.add( new SimpleGrantedAuthority( tipoUsuario.toString() )  );
+		return authorities;
 	}
 }

@@ -6,7 +6,10 @@ import br.com.projetofcamara.projeto.enums.TipoUsuario;
 @Document("usuario")
 public class Vendedor extends Usuario{
 	
+	private static final long serialVersionUID = 1L;
+
 	public Vendedor() {
 		 this.tipoUsuario = TipoUsuario.VENDEDOR;
 	 }
+
 }
