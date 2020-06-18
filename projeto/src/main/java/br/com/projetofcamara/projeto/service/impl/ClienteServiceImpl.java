@@ -1,8 +1,11 @@
 package br.com.projetofcamara.projeto.service.impl;
 
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import br.com.projetofcamara.projeto.entity.Cliente;
 import br.com.projetofcamara.projeto.repository.ClienteRepository;
 import br.com.projetofcamara.projeto.service.ClienteService;
@@ -15,6 +18,7 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Override
 	public Optional<Cliente> criarCliente(Cliente usuario) {
+		usuario.setSenha( new BCryptPasswordEncoder().encode( usuario.getSenha() ) );
 		return Optional.ofNullable(clienteRepository.save(usuario));
 	}
 
@@ -33,11 +37,6 @@ public class ClienteServiceImpl implements ClienteService {
 		}
 		
 		return Optional.ofNullable(clienteRepository.save(clienteBd.get()));
-	}
-	
-	@Override
-	public Optional<Cliente> buscarClientePeloEmail(String email) {		
-		return Optional.ofNullable(clienteRepository.findByEmail(email));
 	}
 	
 	@Override

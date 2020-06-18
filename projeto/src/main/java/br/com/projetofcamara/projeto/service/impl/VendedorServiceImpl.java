@@ -3,6 +3,7 @@ package br.com.projetofcamara.projeto.service.impl;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import br.com.projetofcamara.projeto.entity.Vendedor;
 import br.com.projetofcamara.projeto.repository.VendedorRepository;
@@ -16,6 +17,7 @@ public class VendedorServiceImpl implements VendedorService {
 
 	@Override
 	public Optional<Vendedor> criarVendedor(Vendedor vendedor) {
+		vendedor.setSenha( new BCryptPasswordEncoder().encode( vendedor.getSenha() ) );
 		return Optional.ofNullable(vendedorRepository.save(vendedor));
 	}
 	
@@ -32,11 +34,6 @@ public class VendedorServiceImpl implements VendedorService {
 		}
 		
 		return Optional.ofNullable(vendedorRepository.save(vendedorBd.get()));
-	}
-
-	@Override
-	public Optional<Vendedor> buscarVendedorPeloEmail(String email) {		
-		return Optional.ofNullable(vendedorRepository.findByEmail(email));
 	}
 	
 	@Override
