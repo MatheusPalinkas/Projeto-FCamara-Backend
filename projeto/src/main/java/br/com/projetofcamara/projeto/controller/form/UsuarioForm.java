@@ -2,6 +2,7 @@ package br.com.projetofcamara.projeto.controller.form;
 
 import java.time.LocalDate;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
@@ -10,13 +11,14 @@ public class UsuarioForm {
 	
 	@NotNull @NotEmpty 
 	protected String nome;
-	@NotNull @NotEmpty @Email
+	@NotNull @NotBlank(message = "Email não pode estar vazio")
+    @Email(message="Email invalido")	
 	protected String email;
-	@NotNull @NotEmpty @Length(min = 5)
+	@NotEmpty @Length(min = 5)
 	protected String senha;
-	@NotNull 
+	@NotNull
 	protected LocalDate dataNascimento;
-	@NotNull @NotEmpty 
+	@NotNull @NotBlank(message = "CPF não pode estar vazio")
 	protected String cpf;
 	@NotNull @NotEmpty 
 	protected String telefone;
