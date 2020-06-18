@@ -48,21 +48,21 @@ public class ComercioController {
 		return null;		
 	}
 	
-	@PostMapping
-	public ResponseEntity<ComercioDto> criarComercio(@RequestBody @Valid ComercioForm ComercioForm){
+	@PostMapping	
+	public ResponseEntity<ComercioDto> criarComercio(@RequestBody @Valid ComercioForm comercioForm){
 		
-		 Comercio comercio = ComercioForm.converter();
+		 Comercio comercio = comercioForm.converter();
 		
-		Optional<Comercio> ComercioBd = comercioService.criarComercio(comercio);
+		Optional<Comercio> comercioBd = comercioService.criarComercio(comercio);
 		
-		if(ComercioBd.isPresent()) {
-			return new ResponseEntity<>( new ComercioDto(ComercioBd.get()), HttpStatus.CREATED);
+		if(comercioBd.isPresent()) {
+			return new ResponseEntity<>( new ComercioDto(comercioBd.get()), HttpStatus.CREATED);
 		}
 		
 		return ResponseEntity.badRequest().body(new ComercioDto(comercio));
 	}
 	
-	@PutMapping
+	@PutMapping		
 	public ResponseEntity<ComercioDto> atualizarComercio( @RequestBody @Valid AtualizaComercioForm form) {
 		
 		Comercio comercio = form.converter();

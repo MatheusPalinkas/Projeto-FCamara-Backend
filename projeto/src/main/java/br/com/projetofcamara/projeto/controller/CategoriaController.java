@@ -45,21 +45,21 @@ public class CategoriaController {
 	return ResponseEntity.notFound().build();
 	}
 	
-	@PostMapping
-	public ResponseEntity<CategoriaDto> criarCategoria(@RequestBody @Valid CategoriaForm CategoriaForm){
+	@PostMapping	
+	public ResponseEntity<CategoriaDto> criarCategoria(@RequestBody @Valid CategoriaForm categoriaForm){
 		
-		 Categoria categoria = CategoriaForm.converter();
+		 Categoria categoria = categoriaForm.converter();
 		
-		Optional<Categoria> CategoriaBd = categoriaService.criarCategoria(categoria);
+		Optional<Categoria> categoriaBd = categoriaService.criarCategoria(categoria);
 		
-		if(CategoriaBd.isPresent()) {
-			return new ResponseEntity<>( new CategoriaDto(CategoriaBd.get()), HttpStatus.CREATED);
+		if(categoriaBd.isPresent()) {
+			return new ResponseEntity<>( new CategoriaDto(categoriaBd.get()), HttpStatus.CREATED);
 		}
 		
 		return ResponseEntity.badRequest().body(new CategoriaDto(categoria));
 	}
 	
-	@PutMapping
+	@PutMapping		
 	public ResponseEntity<CategoriaDto> atualizarCategoria( @RequestBody @Valid AtualizaCategoriaForm form) {
 		
 		Categoria categoria = form.converter();
