@@ -3,8 +3,7 @@ Repositorio para o backend do projeto da SQUAD 10 para o programa de formação 
 
 Integrantes: [Matheus Palinkas](https://www.linkedin.com/in/matheus-palinkas/), 
              [Adriana Penha](https://www.linkedin.com/in/adriana-penha-598b12124/), 
-             [Gusthavo Rodrigues](https://www.linkedin.com/in/gusthavo-rodrigues-487847197/), 
-             [Alexandre Ferreira]()
+             [Gusthavo Rodrigues](https://www.linkedin.com/in/gusthavo-rodrigues-487847197/)
 
 # case 
 ![](docs/case.png)
@@ -13,6 +12,31 @@ Integrantes: [Matheus Palinkas](https://www.linkedin.com/in/matheus-palinkas/),
 
 Criar um Site/App (Responsivo), para poder ser um meio dos pequenos comércios (a maioria sem CNPJ) afetados pela pandemia, poder alcançar e vender os seus produtos (através da internet), para os seus clientes e possíveis consumidores.
 
+# Pré-requisitos
+ - Java instalado na sua maquina (esse projeto utiliza a versão 8)
+   - [Link para download](https://www.java.com/pt_BR/download/help/download_options.xml)
+ - MongoDB instalado na sua maquina ou uma versão remota (esse projeto utiliza a versão 4.2)
+   - [Link para download](https://docs.mongodb.com/manual/administration/install-community/)
+ - Uma IDEA para executar o projeto
+   - [Eclipse (esse projeto usa o eclipse na versão 4.15)](https://www.eclipse.org/downloads/packages/)
+   - [IntelliJ IDEA](https://www.jetbrains.com/pt-br/idea/)
+   - [Spring Tools](https://spring.io/tools)
+
+# Passo a passo
+
+### 1. clonar o repositório
+```
+git clone https://github.com/MatheusPalinkas/Projeto-FCamara-Backend.git
+```
+### 2. Importar o projeto na IDEA
+2.1. Abrir a IDEA 
+2.2. Importar o arquivo projeto/pom.xml
+2.3. Esperar o download das dependencias do maven
+
+### 3 Iniciar aplicação
+Clicar no botão de executar o projeto 
+ 
+# utros links
 [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Projeto%20Fcamara&uri=https%3A%2F%2Fgithub.com%2FMatheusPalinkas%2FProjeto-FCamara%2Fblob%2Fmaster%2Fdocs%2Fdoc-rotas-insomnia.json)
 
 [Link para arquivos no drive](https://drive.google.com/drive/folders/17vXJTFi-uhJ_oOf2tmRV0r_MPpUXcZnn?usp=sharing)
