@@ -16,7 +16,7 @@ public class ComercioDto {
 	private String nome;
 	private String urlFoto;
 	private String cnpj;
-	private String valorEntrega;
+	private double valorEntrega;
 	private String tempoEntrega;
 	private LocalDate dataCriacao;
 	private LocalTime horarioAbertura;
@@ -62,7 +62,7 @@ public class ComercioDto {
 		return cnpj;
 	}
 
-	public String getValorEntrega() {
+	public double getValorEntrega() {
 		return valorEntrega;
 	}
 

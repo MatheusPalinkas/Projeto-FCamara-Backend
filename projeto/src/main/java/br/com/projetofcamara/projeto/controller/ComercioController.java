@@ -4,6 +4,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,23 +30,19 @@ public class ComercioController {
 	ComercioService comercioService;
 	
 	@GetMapping
-	public Page<ComercioDto> listaComercio(@RequestParam(required = false) String nome, String idcategoria) {
+	public Page<ComercioDto> listaComercio(@RequestParam(required = false) String nome, String idCategoria, Pageable paginacao) {
 		
-		if (nome != null && idcategoria == null) {
-			Page<Comercio> comercio = comercioService.listarPorNome(nome, 0, 10);
-			return ComercioDto.converter(comercio);
-			
+		if (nome != null && idCategoria == null) {
+			Page<Comercio> comercio = comercioService.listarPorNome(nome, paginacao);
+			return ComercioDto.converter(comercio);			
 		} 
-		if(nome == null && idcategoria != null) {
-			Page<Comercio> comercio = comercioService.listarPorCategoria(idcategoria, 0, 10);
-			return ComercioDto.converter(comercio);
-			
+		if(nome == null && idCategoria != null) {
+			Page<Comercio> comercio = comercioService.listarPorCategoria(idCategoria, paginacao);
+			return ComercioDto.converter(comercio);			
 		} 
-		if(nome == null && idcategoria == null) {
-			Page<Comercio> comercio = comercioService.listarTodosComercios(0, 10);
-			return ComercioDto.converter(comercio);
-		}
-		return null;		
+		
+		Page<Comercio> comercio = comercioService.listarComercios(paginacao);
+		return ComercioDto.converter(comercio);				
 	}
 	
 	@PostMapping	

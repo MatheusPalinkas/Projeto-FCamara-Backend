@@ -13,8 +13,8 @@ public class AtualizaComercioForm {
 	@NotNull @NotEmpty
 	private String id;
 	private String urlFoto;
-	@NotNull @NotEmpty
-	private String valorEntrega;
+	@NotNull 
+	private double valorEntrega;
 	@NotNull @NotEmpty
 	private String tempoEntrega;
 	@NotNull
@@ -34,10 +34,10 @@ public class AtualizaComercioForm {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getValorEntrega() {
+	public double getValorEntrega() {
 		return valorEntrega;
 	}
-	public void setValorEntrega(String valorEntrega) {
+	public void setValorEntrega(double valorEntrega) {
 		this.valorEntrega = valorEntrega;
 	}
 	public String getTempoEntrega() {

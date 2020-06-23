@@ -16,7 +16,7 @@ public class Comercio {
 	private String nome;
 	private String urlFoto;
 	private String cnpj;
-	private String valorEntrega;
+	private double valorEntrega;
 	private String tempoEntrega;
 	private LocalDate dataCriacao;
 	private LocalTime horarioAbertura;
@@ -24,7 +24,7 @@ public class Comercio {
 	private boolean possuiServicoEntrega;
 	private boolean localAtendimento;
 	private List<FormasPagamento> formasPagamento;
-	@DBRef(lazy = true)
+	@DBRef
 	private Endereco endereco;
 	@DBRef
 	private Categoria categoria;
@@ -72,14 +72,14 @@ public class Comercio {
 		this.cnpj = cnpj;
 	}
 
-	public String getValorEntrega() {
+	public double getValorEntrega() {
 		return valorEntrega;
 	}
 
-	public void setValorEntrega(String valorEntrega) {
+	public void setValorEntrega(double valorEntrega) {
 		this.valorEntrega = valorEntrega;
 	}
-
+	
 	public String getTempoEntrega() {
 		return tempoEntrega;
 	}

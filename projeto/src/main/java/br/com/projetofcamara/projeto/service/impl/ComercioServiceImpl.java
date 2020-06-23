@@ -3,7 +3,7 @@ package br.com.projetofcamara.projeto.service.impl;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import br.com.projetofcamara.projeto.entity.Categoria;
 import br.com.projetofcamara.projeto.entity.Comercio;
@@ -46,18 +46,18 @@ public class ComercioServiceImpl implements ComercioService{
 	}
 
 	@Override
-	public Page<Comercio> listarTodosComercios(int page, int count) {		
-		return comercioRespository.findAll(PageRequest.of(page, count));
+	public Page<Comercio> listarComercios(Pageable paginacao) {		
+		return comercioRespository.findAll(paginacao);
 	}
 
 	@Override
-	public Page<Comercio> listarPorNome(String nome, int page, int count) {
-		return comercioRespository.findByNomeIgnoreCaseLike(nome, PageRequest.of(page, count));
+	public Page<Comercio> listarPorNome(String nome, Pageable paginacao) {
+		return comercioRespository.findByNomeIgnoreCaseLike(nome, paginacao);
 	}
 
 	@Override
-	public Page<Comercio> listarPorCategoria(String idCategoria, int page, int count) {
-		return comercioRespository.findByCategoria(new Categoria(idCategoria), PageRequest.of(page, count));
+	public Page<Comercio> listarPorCategoria(String idCategoria, Pageable paginacao) {
+		return comercioRespository.findByCategoria(new Categoria(idCategoria), paginacao);
 	}
 	
 }

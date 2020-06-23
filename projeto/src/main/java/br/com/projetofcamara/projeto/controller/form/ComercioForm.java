@@ -14,8 +14,8 @@ public class ComercioForm {
 	private String nome;
 	private String urlFoto;	
 	private String cnpj;
-	@NotNull @NotEmpty
-	private String valorEntrega;
+	@NotNull 
+	private double valorEntrega;
 	@NotNull @NotEmpty
 	private String tempoEntrega;	
 	@NotNull
@@ -49,10 +49,10 @@ public class ComercioForm {
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
-	public String getValorEntrega() {
+	public double getValorEntrega() {
 		return valorEntrega;
 	}
-	public void setValorEntrega(String valorEntrega) {
+	public void setValorEntrega(double valorEntrega) {
 		this.valorEntrega = valorEntrega;
 	}
 	public String getTempoEntrega() {
