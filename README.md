@@ -6,13 +6,19 @@ Integrantes: [Matheus Palinkas](https://www.linkedin.com/in/matheus-palinkas/),
              [Adriana Penha](https://www.linkedin.com/in/adriana-penha-598b12124/), 
              [Gusthavo Rodrigues](https://www.linkedin.com/in/gusthavo-rodrigues-487847197/)
 
+---
+
 # Case 
 
 !["Foto do case"](docs/case.png)
 
+---
+
 # Nossa proposta de solução
 
 Criar um Site/App (Responsivo), para poder ser um meio dos pequenos comércios (a maioria sem CNPJ) afetados pela pandemia, poder alcançar e vender os seus produtos (através da internet), para os seus clientes e possíveis consumidores.
+
+---
 
 # Pré-requisitos
 
@@ -25,13 +31,16 @@ Criar um Site/App (Responsivo), para poder ser um meio dos pequenos comércios (
   - [IntelliJ IDEA](https://www.jetbrains.com/pt-br/idea/)
   - [Spring Tools](https://spring.io/tools)
 
+---
+
 # Passo a passo
 
 ### 1. clonar o repositório
-```
-git clone https://github.com/MatheusPalinkas/Projeto-FCamara-Backend.git
-```
+
+```git clone https://github.com/MatheusPalinkas/Projeto-FCamara-Backend.git```
+
 ### 2. importar o projeto na IDEA (exemplo no eclipse)
+
 2.1. Clicar no menu File > import
 2.2. Existing Maven Projects e cliclar next
 !['Exemplo de como importar um projeto spring'](docs/../docs/imgs-readme/import.png)
@@ -39,12 +48,21 @@ git clone https://github.com/MatheusPalinkas/Projeto-FCamara-Backend.git
 !['Exemplo de como importar um projeto spring'](docs/../docs/imgs-readme/import2.png)
 2.4. Esperar o download das dependencias do maven
 
+### 3 configurar application.propertes
 
-### 3 iniciar aplicação
+3.1 Mudar o nome do arquivo application.example.properties para application.properties
+3.2 colocar um valor como chave para o *projeto.jwt.secret*
+3.3 configurar sua conexão com o mongoDB
+
+### 4 iniciar aplicação
+
 Iniciar a o projeto clicando no botão de *Debug* o projeto
 !['Exemplo de execução de projeto'](docs/../docs/imgs-readme/executaDebug.png)
- 
-# Outros links
+
+---
+
+## Outros links
+
 [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Projeto%20Fcamara&uri=https%3A%2F%2Fgithub.com%2FMatheusPalinkas%2FProjeto-FCamara%2Fblob%2Fmaster%2Fdocs%2Fdoc-rotas-insomnia.json)
 
 [Link para arquivos no drive](https://drive.google.com/drive/folders/17vXJTFi-uhJ_oOf2tmRV0r_MPpUXcZnn?usp=sharing)
