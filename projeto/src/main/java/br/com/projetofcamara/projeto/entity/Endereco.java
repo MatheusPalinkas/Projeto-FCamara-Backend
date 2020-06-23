@@ -2,7 +2,6 @@ package br.com.projetofcamara.projeto.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import br.com.projetofcamara.projeto.enums.TipoDetentor;
 
 @Document
@@ -25,6 +24,10 @@ public class Endereco {
 		this.codigoDetentor = codigoDetentor;
 	}
 	
+	public Endereco(String id) {
+		this.id = id;
+	}
+
 	public Endereco() {
 		
 	}

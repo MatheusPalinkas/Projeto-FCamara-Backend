@@ -17,6 +17,10 @@ public class Cliente extends Usuario {
 		 this.tipoUsuario = TipoUsuario.CLIENTE;
 	 }
 
+	public Cliente(String id) {
+		this.id = id;
+	}
+
 	public List<Endereco> getEndereco() {
 		return endereco;
 	}
