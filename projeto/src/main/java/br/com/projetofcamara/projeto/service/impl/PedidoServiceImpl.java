@@ -13,6 +13,7 @@ import br.com.projetofcamara.projeto.entity.Endereco;
 import br.com.projetofcamara.projeto.entity.ItemPedido;
 import br.com.projetofcamara.projeto.entity.Pedido;
 import br.com.projetofcamara.projeto.entity.Produto;
+import br.com.projetofcamara.projeto.enums.StatusPedido;
 import br.com.projetofcamara.projeto.repository.PedidoRepository;
 import br.com.projetofcamara.projeto.service.ComercioService;
 import br.com.projetofcamara.projeto.service.EnderecoService;
@@ -37,7 +38,6 @@ public class PedidoServiceImpl implements PedidoService{
 	@Override
 	public Optional<Pedido> criarPedido(Pedido pedido) throws Exception {
 	
-		// TODO Tratar Exception
 		if(pedido.getItensPedido().isEmpty()) {
 			throw new Exception("Carrinho vazio!");
 		}
@@ -112,4 +112,43 @@ public class PedidoServiceImpl implements PedidoService{
 		return pedidoRepository.findByComercio(new Comercio(idComercio), paginacao);
 	}
 	
+	public Optional<Pedido> aceitaPedido(Pedido pedido){
+		
+		Optional<Pedido> pedidoBd = pedidoRepository.findById(pedido.getId());
+		if(pedidoBd.isPresent() && StatusPedido.PENDENTE.equals( pedidoBd.get().getStatusPedido() )) {
+			pedidoBd.get().setStatusPedido(pedido.getStatusPedido());	
+		}else{
+			throw new IllegalArgumentException("Este pedido já foi cancelado pelo cliente ou negado pelo vendedor");
+		}
+		return Optional.ofNullable(pedidoRepository.save(pedidoBd.get()));			
+	}
+	
+
+	public Optional<Pedido> negarPedido(Pedido pedido){
+		
+		Optional<Pedido> pedidoBd = pedidoRepository.findById(pedido.getId());
+		if(pedidoBd.isPresent() && StatusPedido.PENDENTE.equals( pedidoBd.get().getStatusPedido() )) {
+			pedidoBd.get().setStatusPedido(pedido.getStatusPedido());	
+		}
+		return Optional.ofNullable(pedidoRepository.save(pedidoBd.get()));			
+	}
+	
+	public Optional<Pedido> enviarPedido(Pedido pedido){
+		
+		Optional<Pedido> pedidoBd = pedidoRepository.findById(pedido.getId());
+		if(pedidoBd.isPresent() && StatusPedido.ACEITO.equals( pedidoBd.get().getStatusPedido() )) {
+			pedidoBd.get().setStatusPedido(pedido.getStatusPedido());	
+		}
+		return Optional.ofNullable(pedidoRepository.save(pedidoBd.get()));			
+	}
+	
+	public Optional<Pedido> entregarPedido(Pedido pedido){
+		
+		Optional<Pedido> pedidoBd = pedidoRepository.findById(pedido.getId());
+		if(pedidoBd.isPresent() && StatusPedido.ENVIADO.equals( pedidoBd.get().getStatusPedido() )) {
+			pedidoBd.get().setStatusPedido(pedido.getStatusPedido());	
+		}
+		return Optional.ofNullable(pedidoRepository.save(pedidoBd.get()));			
+	}
+		 
 }

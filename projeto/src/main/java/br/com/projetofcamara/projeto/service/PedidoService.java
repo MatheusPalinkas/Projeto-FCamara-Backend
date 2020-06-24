@@ -14,4 +14,12 @@ public interface PedidoService {
 	Page<Pedido> listarPedidoComercio(String idComercio, Pageable paginacao);
 
 	Page<Pedido> listarPedidoCliente(String idCliente, Pageable paginacao);	
+	
+	Optional<Pedido> aceitaPedido(Pedido pedido);
+	
+	Optional<Pedido> negarPedido(Pedido pedido);
+	
+	Optional<Pedido> enviarPedido(Pedido pedido);
+	
+	Optional<Pedido> entregarPedido(Pedido pedido);
 }

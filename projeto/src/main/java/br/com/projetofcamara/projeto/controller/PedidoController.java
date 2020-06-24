@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.projetofcamara.projeto.controller.dto.PedidoDto;
 import br.com.projetofcamara.projeto.controller.form.PedidoForm;
 import br.com.projetofcamara.projeto.entity.Pedido;
+import br.com.projetofcamara.projeto.enums.StatusPedido;
 import br.com.projetofcamara.projeto.service.PedidoService;
 
 @RestController
@@ -55,6 +57,38 @@ public class PedidoController {
 		
 		return ResponseEntity.badRequest().body(new PedidoDto(pedido));
 	}	
+	
+	@PutMapping("/{id}/{status}")
+	public ResponseEntity<PedidoDto> atualizaStatus(@PathVariable String id, @PathVariable String status){
+		
+		Optional<Pedido> pedidoBd = Optional.empty();
+		Pedido pedido = new Pedido();
+		pedido.setId(id);
+		pedido.setStatusPedido(StatusPedido.getEnumByText(status));				
+		
+		switch (pedido.getStatusPedido()) {
+			case ACEITO:
+				pedidoBd = pedidoService.aceitaPedido(pedido);
+				break;
+			case NEGADO:
+				pedidoBd = pedidoService.negarPedido(pedido);
+				break;
+			case ENVIADO:
+				pedidoBd = pedidoService.enviarPedido(pedido);
+				break;
+			case ENTREGUE:
+				pedidoBd = pedidoService.entregarPedido(pedido);
+				break;
+			default:
+				break;
+		}
+		
+		if(pedidoBd.isPresent()) {
+			return new ResponseEntity<>( new PedidoDto(pedidoBd.get()), HttpStatus.OK);
+		}
+		
+		return ResponseEntity.badRequest().body(new PedidoDto(pedido));
+	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<PedidoDto> buscarPorId(@PathVariable String id){

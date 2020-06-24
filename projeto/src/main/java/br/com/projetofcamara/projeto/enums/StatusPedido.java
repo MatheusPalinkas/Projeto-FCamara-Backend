@@ -6,5 +6,13 @@ public enum StatusPedido {
   ENTREGUE,
   ENVIADO,
   NEGADO,
-  PENDENTE
+  PENDENTE;
+	
+	//transforma uma string em um Enum
+	public static StatusPedido getEnumByText(String status){
+		if(status != null && !status.isEmpty()) {
+			return StatusPedido.valueOf(status.toUpperCase());
+		}
+		return null;
+	}
 }
