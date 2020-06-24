@@ -43,9 +43,13 @@ Criar um Site/App (Responsivo), para poder ser um meio dos pequenos comércios (
 
 2.1. Clicar no menu File > import
 2.2. Existing Maven Projects e clicar em next
+
 !['Exemplo de como importar um projeto spring'](docs/../docs/imgs-readme/import.png)
+
 2.3. Procurar a pasta e importar pom.xml
+
 !['Exemplo de como importar um projeto spring-2'](docs/../docs/imgs-readme/import2.png)
+
 2.4. Esperar o download das dependencias do maven
 
 ### 3 configurar application.propertes
@@ -56,7 +60,8 @@ Criar um Site/App (Responsivo), para poder ser um meio dos pequenos comércios (
 
 ### 4 iniciar aplicação
 
-Iniciar a o projeto clicando no botão de *Debug* o projeto
+Iniciar a o projeto clicando no botão de *Debug*
+
 !['Exemplo de execução de projeto'](docs/../docs/imgs-readme/executaDebug.png)
 
 ---
