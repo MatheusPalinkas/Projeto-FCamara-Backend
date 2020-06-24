@@ -11,15 +11,11 @@ public class AtualizaProdutoForm {
 	@NotNull @NotEmpty
 	private String nome;
 	@NotNull 
-	private double preco;
-	@NotNull
-	private int quantidade;
+	private double preco;	
 	@NotNull @NotEmpty
 	private String descricao;
 	private String urlFoto;
-	@NotNull
-	private boolean produtoEmEstoque;
-		
+			
 	public String getId() {
 		return id;
 	}
@@ -43,15 +39,7 @@ public class AtualizaProdutoForm {
 	public void setPreco(double preco) {
 		this.preco = preco;
 	}
-
-	public int getQuantidade() {
-		return quantidade;
-	}
-
-	public void setQuantidade(int quantidade) {
-		this.quantidade = quantidade;
-	}
-
+	
 	public String getDescricao() {
 		return descricao;
 	}
@@ -67,24 +55,14 @@ public class AtualizaProdutoForm {
 	public void setUrlFoto(String urlFoto) {
 		this.urlFoto = urlFoto;
 	}
-
-	public boolean isProdutoEmEstoque() {
-		return produtoEmEstoque;
-	}
-
-	public void setProdutoEmEstoque(boolean produtoEmEstoque) {
-		this.produtoEmEstoque = produtoEmEstoque;
-	}
 	
 	public Produto converter() {
 		Produto produto = new Produto();
 		produto.setId(id);
 		produto.setNome(nome);
-		produto.setPreco(preco);
-		produto.setQuantidade(quantidade);
+		produto.setPreco(preco);		
 		produto.setDescricao(descricao);
-		produto.setUrlFoto(urlFoto);
-		produto.setProdutoEmEstoque(produtoEmEstoque);		
+		produto.setUrlFoto(urlFoto);		
 				
 		return produto;
 	}		

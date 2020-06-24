@@ -2,7 +2,6 @@ package br.com.projetofcamara.projeto.controller.form;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
 import br.com.projetofcamara.projeto.entity.Categoria;
 import br.com.projetofcamara.projeto.entity.Comercio;
 import br.com.projetofcamara.projeto.entity.Produto;
@@ -17,13 +16,11 @@ public class ProdutoForm {
 	private int quantidade;
 	@NotNull @NotEmpty
 	private String descricao;
-	private String urlFoto;
-	@NotNull
-	private boolean produtoEmEstoque;
+	private String urlFoto;	
 	@NotNull
 	private Comercio comercio;	
 	@NotNull	
-	private Categoria categoria;
+	private Categoria categoria;	
 	
 	public String getNome() {
 		return nome;
@@ -67,20 +64,14 @@ public class ProdutoForm {
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
 	}	
-	public boolean isProdutoEmEstoque() {
-		return produtoEmEstoque;
-	}
-	public void setProdutoEmEstoque(boolean produtoEmEstoque) {
-		this.produtoEmEstoque = produtoEmEstoque;
-	}
+	
 	public Produto converter() {
 		Produto produto = new Produto();
 		produto.setNome(nome);
 		produto.setPreco(preco);
 		produto.setQuantidade(quantidade);
 		produto.setDescricao(descricao);
-		produto.setUrlFoto(urlFoto);
-		produto.setProdutoEmEstoque(produtoEmEstoque);
+		produto.setUrlFoto(urlFoto);		
 		produto.setComercio(comercio);
 		produto.setCategoria(categoria);
 		
