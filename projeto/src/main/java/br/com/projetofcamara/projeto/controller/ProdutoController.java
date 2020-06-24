@@ -4,6 +4,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import br.com.projetofcamara.projeto.controller.dto.EstoqueProdutoDto;
 import br.com.projetofcamara.projeto.controller.dto.ProdutoDto;
 import br.com.projetofcamara.projeto.controller.form.AtualizaProdutoForm;
+import br.com.projetofcamara.projeto.controller.form.EstoqueForm;
 import br.com.projetofcamara.projeto.controller.form.ProdutoForm;
 import br.com.projetofcamara.projeto.entity.Produto;
 import br.com.projetofcamara.projeto.service.ComercioService;
@@ -32,28 +35,31 @@ public class ProdutoController {
 	@Autowired
 	ComercioService comercioService;
 	
+	
 	@GetMapping("comercio/{idComercio}")
-	public Page<ProdutoDto> listaProdutoDeUmComercio(
-		@RequestParam(defaultValue  = "dataCriacao", required = false) String ordenarPor, 
-		@RequestParam(defaultValue  = "DESC", required = false) String direcao, @PathVariable String idComercio ) {
+	public Page<ProdutoDto> listaProdutoDeUmComercio(@PathVariable String idComercio, Pageable paginacao) {
 		
-		Page<Produto> produto = produtoService.listarProdutosDeUmComercio(0, 10, ordenarPor, direcao, idComercio);
+		Page<Produto> produto = produtoService.listarProdutosDeUmComercio(idComercio, paginacao);
 		return ProdutoDto.converter(produto);
 	}
 	
 	@GetMapping
-	public Page<ProdutoDto> listaProdutos(
-		@RequestParam(defaultValue  = "dataCriacao", required = false) String ordenarPor, 
-		@RequestParam(defaultValue  = "DESC", required = false) String direcao) {
+	public Page<ProdutoDto> listaProdutos(@RequestParam(required = false) String nome, Pageable paginacao){
 		
-		Page<Produto> produto = produtoService.listarProdutos(0, 10, ordenarPor, direcao);
-		return ProdutoDto.converter(produto);
+		Page<Produto> produto;
+		if(nome == null) {
+			produto = produtoService.listarProdutos(paginacao);			
+		}else {
+			produto = produtoService.listarPorNome(nome, paginacao);
+		}
+		
+		return ProdutoDto.converter(produto); 		
 	}
 	
 	@PostMapping
-	public ResponseEntity<ProdutoDto> criarProduto(@RequestBody @Valid ProdutoForm ProdutoForm){
+	public ResponseEntity<ProdutoDto> criarProduto(@RequestBody @Valid ProdutoForm produtoForm){
 		
-		Produto produto = ProdutoForm.converter();
+		Produto produto = produtoForm.converter();
 		
 		Optional<Produto> produtoBd = produtoService.criarProduto(produto);
 		
@@ -77,6 +83,19 @@ public class ProdutoController {
 		return ResponseEntity.badRequest().body(new ProdutoDto(produto));	
 	}
 	
+	@PutMapping("/estoque")
+	public ResponseEntity<EstoqueProdutoDto> atualizaEstoqueProduto( @RequestBody @Valid EstoqueForm form) {
+		
+		Produto produto = form.converter();
+		Optional<Produto> produtoBd = produtoService.alterarEstoqueProduto(produto);
+		
+		if(produtoBd.isPresent()) {
+			return new ResponseEntity<>(new EstoqueProdutoDto(produtoBd.get()), HttpStatus.OK);
+		}
+		
+		return ResponseEntity.badRequest().body(new EstoqueProdutoDto(produto));	
+	}
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<ProdutoDto> buscarProdutoPeloId(@PathVariable String id){
 		
@@ -87,18 +106,7 @@ public class ProdutoController {
 		}
 		
 		return ResponseEntity.notFound().build();
-	}
-	
-	@GetMapping("nome/{nome}")
-	public Page<ProdutoDto> buscarPorNome(@PathVariable String nome){
-		
-		if(nome != null) {
-			Page<Produto> produtoBd = produtoService.listarPorNome(nome, 0, 10);
-			return ProdutoDto.converter(produtoBd);
-		}
-		
-		return null;
-	}
+	}	
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> remover(@PathVariable String id){
