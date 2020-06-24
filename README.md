@@ -26,7 +26,7 @@ Criar um Site/App (Responsivo), para poder ser um meio dos pequenos comércios (
   - [Link para download](https://www.java.com/pt_BR/download/help/download_options.xml)
 - MongoDB instalado na sua maquina ou uma versão remota (esse projeto utiliza a versão 4.2)
   - [Link para download](https://docs.mongodb.com/manual/administration/install-community/)
-- Uma IDEA para executar o projeto
+- Uma IDE para executar o projeto
   - [Eclipse (esse projeto usa o eclipse na versão 4.15)](https://www.eclipse.org/downloads/packages/)
   - [IntelliJ IDEA](https://www.jetbrains.com/pt-br/idea/)
   - [Spring Tools](https://spring.io/tools)
@@ -39,13 +39,13 @@ Criar um Site/App (Responsivo), para poder ser um meio dos pequenos comércios (
 
 ```git clone https://github.com/MatheusPalinkas/Projeto-FCamara-Backend.git```
 
-### 2. importar o projeto na IDEA (exemplo no eclipse)
+### 2. importar o projeto na IDE (exemplo no eclipse)
 
 2.1. Clicar no menu File > import
-2.2. Existing Maven Projects e cliclar next
+2.2. Existing Maven Projects e clicar em next
 !['Exemplo de como importar um projeto spring'](docs/../docs/imgs-readme/import.png)
 2.3. Procurar a pasta e importar pom.xml
-!['Exemplo de como importar um projeto spring'](docs/../docs/imgs-readme/import2.png)
+!['Exemplo de como importar um projeto spring-2'](docs/../docs/imgs-readme/import2.png)
 2.4. Esperar o download das dependencias do maven
 
 ### 3 configurar application.propertes
