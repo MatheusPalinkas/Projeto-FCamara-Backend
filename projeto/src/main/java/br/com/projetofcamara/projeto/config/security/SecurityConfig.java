@@ -1,5 +1,8 @@
 package br.com.projetofcamara.projeto.config.security;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +16,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import br.com.projetofcamara.projeto.repository.UsuarioRepository;
 
 @EnableWebSecurity
@@ -43,20 +49,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	//Configuracoes de autorizacao
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		http.cors().configurationSource(corsConfigurationSource());
 		http.authorizeRequests()
 		.antMatchers(HttpMethod.POST, "/login").permitAll()
-		.antMatchers("/cliente/**").permitAll()
-		.antMatchers("/vendedor/**").permitAll()
-		.antMatchers("/comercio/**").permitAll()	
-		.antMatchers("/categoria/**").permitAll()
-		.antMatchers("/produto/**").permitAll()	
-		.antMatchers("/pedido/**").permitAll()
-		.antMatchers("/imagem/**").permitAll()
+		.antMatchers("/**").permitAll()		
 		.anyRequest().authenticated()
 		.and().csrf().disable()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		.and().addFilterBefore(new AutenticacaoViaTokenFilter(tokenService, usuarioRepository), UsernamePasswordAuthenticationFilter.class);
 	}
+	
+	CorsConfigurationSource corsConfigurationSource() {
+	    CorsConfiguration configuration = new CorsConfiguration();
+	    List<String> allowOrigins = Arrays.asList("*");
+	    configuration.setAllowedOrigins(allowOrigins);
+	    configuration.setAllowedMethods(Collections.singletonList("*"));
+	    configuration.setAllowedHeaders(Collections.singletonList("*"));	   
+	    configuration.setAllowCredentials(true);
+	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	    source.registerCorsConfiguration("/**", configuration);
+	    return source;
+	}		
 	
 	//Configuracoes de recursos estaticos(js, css, imagens, etc.)
 		@Override
