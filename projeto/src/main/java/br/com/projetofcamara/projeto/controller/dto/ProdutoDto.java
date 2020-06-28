@@ -2,8 +2,6 @@ package br.com.projetofcamara.projeto.controller.dto;
 
 import java.time.LocalDateTime;
 import org.springframework.data.domain.Page;
-import br.com.projetofcamara.projeto.entity.Categoria;
-import br.com.projetofcamara.projeto.entity.Comercio;
 import br.com.projetofcamara.projeto.entity.Produto;
 
 public class ProdutoDto {
@@ -16,8 +14,8 @@ public class ProdutoDto {
 	private LocalDateTime dataCriacao;
 	private String urlFoto;
 	private boolean produtoEmEstoque;
-	private Comercio comercio;
-	private Categoria categoria;
+	private String idComercio;
+	private String idCategoria;
 	
 	public ProdutoDto(Produto produto) {
 		this.id = produto.getId();
@@ -28,8 +26,8 @@ public class ProdutoDto {
 		this.dataCriacao = produto.getDataCriacao();
 		this.urlFoto = produto.getUrlFoto();
 		this.produtoEmEstoque = produto.isProdutoEmEstoque();
-		this.comercio = produto.getComercio();
-		this.categoria = produto.getCategoria();
+		this.idComercio = produto.getIdComercio();
+		this.idCategoria = produto.getIdCategoria();
 	}
 
 	public String getId() {
@@ -64,15 +62,16 @@ public class ProdutoDto {
 		return produtoEmEstoque;
 	}
 
-	public Comercio getComercio() {
-		return comercio;
+	public String getIdComercio() {
+		return idComercio;
 	}
 
-	public Categoria getCategoria() {
-		return categoria;
+	public String getIdCategoria() {
+		return idCategoria;
 	}
 	
 	public static Page<ProdutoDto> converter(Page<Produto> produto) {
 		return produto.map(ProdutoDto::new);
 	}
+	
 }

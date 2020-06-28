@@ -1,11 +1,11 @@
 package br.com.projetofcamara.projeto.service.impl;
 
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import br.com.projetofcamara.projeto.entity.Comercio;
 import br.com.projetofcamara.projeto.entity.Produto;
 import br.com.projetofcamara.projeto.repository.ProdutoRepository;
 import br.com.projetofcamara.projeto.service.ProdutoService;
@@ -26,7 +26,7 @@ public class ProdutoServiceImpl implements ProdutoService{
 		
 		Optional<Produto> produtoBanco = produtoRepository.findById(produto.getId());
 		if(produtoBanco.isPresent()) {
-			produtoBanco.get().setCategoria(produto.getCategoria());
+			
 			produtoBanco.get().setDescricao(produto.getDescricao());
 			produtoBanco.get().setNome(produto.getNome());
 			produtoBanco.get().setPreco(produto.getPreco());			
@@ -42,7 +42,7 @@ public class ProdutoServiceImpl implements ProdutoService{
 
 	@Override
 	public Page<Produto> listarProdutosDeUmComercio(String idComercio, Pageable paginacao) {
-		return produtoRepository.findByComercio(new Comercio(idComercio), paginacao);
+		return produtoRepository.findByIdComercio(idComercio, paginacao);
 	}
 	
 	@Override
