@@ -2,11 +2,8 @@ package br.com.projetofcamara.projeto.entity;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import br.com.projetofcamara.projeto.enums.FormasPagamento;
 
 @Document
 public class Comercio {
@@ -17,17 +14,17 @@ public class Comercio {
 	private String urlFoto;
 	private String cnpj;
 	private double valorEntrega;
-	private String tempoEntrega;
+	private LocalTime tempoEntrega;
 	private LocalDate dataCriacao;
 	private LocalTime horarioAbertura;
 	private LocalTime horarioFechamento;
 	private boolean possuiServicoEntrega;
 	private boolean localAtendimento;
-	private List<FormasPagamento> formasPagamento;
-	@DBRef
-	private Endereco endereco;
-	@DBRef
-	private Categoria categoria;
+	private boolean pagamentoCartao;
+	private boolean pagamentoDinheiro;
+	private String idCategoria;
+	private String idEndereco;
+	private String idVendedor;
 	
 	
 	public Comercio() {
@@ -78,15 +75,7 @@ public class Comercio {
 
 	public void setValorEntrega(double valorEntrega) {
 		this.valorEntrega = valorEntrega;
-	}
-	
-	public String getTempoEntrega() {
-		return tempoEntrega;
-	}
-
-	public void setTempoEntrega(String tempoEntrega) {
-		this.tempoEntrega = tempoEntrega;
-	}
+	}	
 
 	public LocalTime getHorarioAbertura() {
 		return horarioAbertura;
@@ -120,22 +109,6 @@ public class Comercio {
 		this.localAtendimento = localAtendimento;
 	}
 
-	public List<FormasPagamento> getFormasPagamento() {
-		return formasPagamento;
-	}
-
-	public void setFormasPagamento(List<FormasPagamento> formasPagamento) {
-		this.formasPagamento = formasPagamento;
-	}
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-
 	public LocalDate getDataCriacao() {
 		return dataCriacao;
 	}
@@ -144,12 +117,52 @@ public class Comercio {
 		this.dataCriacao = dataCriacao;
 	}
 
-	public Categoria getCategoria() {
-		return categoria;
+	public boolean isPagamentoCartao() {
+		return pagamentoCartao;
 	}
 
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
+	public void setPagamentoCartao(boolean pagamentoCartao) {
+		this.pagamentoCartao = pagamentoCartao;
 	}
+
+	public boolean isPagamentoDinheiro() {
+		return pagamentoDinheiro;
+	}
+
+	public void setPagamentoDinheiro(boolean pagamentoDinheiro) {
+		this.pagamentoDinheiro = pagamentoDinheiro;
+	}
+
+	public String getIdCategoria() {
+		return idCategoria;
+	}
+
+	public void setIdCategoria(String idCategoria) {
+		this.idCategoria = idCategoria;
+	}
+
+	public String getIdEndereco() {
+		return idEndereco;
+	}
+
+	public void setIdEndereco(String idEndereco) {
+		this.idEndereco = idEndereco;
+	}
+
+	public LocalTime getTempoEntrega() {
+		return tempoEntrega;
+	}
+
+	public void setTempoEntrega(LocalTime tempoEntrega) {
+		this.tempoEntrega = tempoEntrega;
+	}
+
+	public String getIdVendedor() {
+		return idVendedor;
+	}
+
+	public void setIdVendedor(String idVendedor) {
+		this.idVendedor = idVendedor;
+	}	
 	
 }

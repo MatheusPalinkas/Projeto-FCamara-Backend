@@ -1,12 +1,9 @@
 package br.com.projetofcamara.projeto.controller.form;
 
 import java.time.LocalTime;
-import java.util.List;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
 import br.com.projetofcamara.projeto.entity.Comercio;
-import br.com.projetofcamara.projeto.enums.FormasPagamento;
 
 public class AtualizaComercioForm {
 	
@@ -15,8 +12,8 @@ public class AtualizaComercioForm {
 	private String urlFoto;
 	@NotNull 
 	private double valorEntrega;
-	@NotNull @NotEmpty
-	private String tempoEntrega;
+	@NotNull 
+	private LocalTime tempoEntrega;
 	@NotNull
 	private LocalTime horarioAbertura;
 	@NotNull
@@ -26,8 +23,10 @@ public class AtualizaComercioForm {
 	@NotNull
 	private boolean localAtendimento;
 	@NotNull
-	private List<FormasPagamento> formasPagamento;
-	
+	private boolean pagamentoCartao;
+	@NotNull
+	private boolean pagamentoDinheiro;
+			
 	public String getId() {
 		return id;
 	}
@@ -39,13 +38,7 @@ public class AtualizaComercioForm {
 	}
 	public void setValorEntrega(double valorEntrega) {
 		this.valorEntrega = valorEntrega;
-	}
-	public String getTempoEntrega() {
-		return tempoEntrega;
-	}
-	public void setTempoEntrega(String tempoEntrega) {
-		this.tempoEntrega = tempoEntrega;
-	}
+	}	
 	public LocalTime getHorarioAbertura() {
 		return horarioAbertura;
 	}
@@ -70,18 +63,30 @@ public class AtualizaComercioForm {
 	public void setLocalAtendimento(boolean localAtendimento) {
 		this.localAtendimento = localAtendimento;
 	}
-	public List<FormasPagamento> getFormasPagamento() {
-		return formasPagamento;
-	}
-	public void setFormasPagamento(List<FormasPagamento> formasPagamento) {
-		this.formasPagamento = formasPagamento;
-	}
 	public String getUrlFoto() {
 		return urlFoto;
 	}
 	public void setUrlFoto(String urlFoto) {
 		this.urlFoto = urlFoto;
 	}
+	public LocalTime getTempoEntrega() {
+		return tempoEntrega;
+	}
+	public void setTempoEntrega(LocalTime tempoEntrega) {
+		this.tempoEntrega = tempoEntrega;
+	}
+	public boolean isPagamentoCartao() {
+		return pagamentoCartao;
+	}
+	public void setPagamentoCartao(boolean pagamentoCartao) {
+		this.pagamentoCartao = pagamentoCartao;
+	}
+	public boolean isPagamentoDinheiro() {
+		return pagamentoDinheiro;
+	}
+	public void setPagamentoDinheiro(boolean pagamentoDinheiro) {
+		this.pagamentoDinheiro = pagamentoDinheiro;
+	}			
 	
 	public Comercio converter() {
 		Comercio comercio = new Comercio();
@@ -93,8 +98,10 @@ public class AtualizaComercioForm {
 		comercio.setHorarioFechamento(horarioFechamento);
 		comercio.setPossuiServicoEntrega(possuiServicoEntrega);
 		comercio.setLocalAtendimento(localAtendimento);
-		comercio.setFormasPagamento(formasPagamento);
+		comercio.setPagamentoCartao(pagamentoCartao);
+		comercio.setPagamentoDinheiro(pagamentoDinheiro);
 		
 		return comercio;
-	}			
+	}
+	
 }

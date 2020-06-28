@@ -2,13 +2,8 @@ package br.com.projetofcamara.projeto.controller.dto;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 import org.springframework.data.domain.Page;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import br.com.projetofcamara.projeto.entity.Categoria;
 import br.com.projetofcamara.projeto.entity.Comercio;
-import br.com.projetofcamara.projeto.entity.Endereco;
-import br.com.projetofcamara.projeto.enums.FormasPagamento;
 
 public class ComercioDto {
 
@@ -17,17 +12,17 @@ public class ComercioDto {
 	private String urlFoto;
 	private String cnpj;
 	private double valorEntrega;
-	private String tempoEntrega;
+	private LocalTime tempoEntrega;
 	private LocalDate dataCriacao;
 	private LocalTime horarioAbertura;
 	private LocalTime horarioFechamento;
 	private boolean possuiServicoEntrega;
 	private boolean localAtendimento;
-	private List<FormasPagamento> formasPagamento;
-	@DBRef(lazy = true)
-	private Endereco endereco;
-	@DBRef
-	private Categoria categoria;
+	private boolean pagamentoCartao;
+	private boolean pagamentoDinheiro;
+	private String idCategoria;
+	private String idEndereco;
+	private String idVendedor;
 	
 	public ComercioDto(Comercio comercio) {
 		this.id = comercio.getId();
@@ -39,11 +34,13 @@ public class ComercioDto {
 		this.dataCriacao = comercio.getDataCriacao();
 		this.horarioAbertura = comercio.getHorarioAbertura();
 		this.horarioFechamento = comercio.getHorarioFechamento();
-		this.formasPagamento = comercio.getFormasPagamento();
+		this.pagamentoCartao = comercio.isPagamentoCartao();
+		this.pagamentoDinheiro = comercio.isPagamentoDinheiro();
 		this.localAtendimento = comercio.isLocalAtendimento();
 		this.possuiServicoEntrega = comercio.isPossuiServicoEntrega();
-		this.categoria = comercio.getCategoria();
-		this.endereco = comercio.getEndereco();		
+		this.idCategoria = comercio.getIdCategoria();
+		this.idEndereco = comercio.getIdEndereco();
+		this.idVendedor = comercio.getIdVendedor();
 	}
 
 	public String getId() {
@@ -66,7 +63,7 @@ public class ComercioDto {
 		return valorEntrega;
 	}
 
-	public String getTempoEntrega() {
+	public LocalTime getTempoEntrega() {
 		return tempoEntrega;
 	}
 
@@ -90,19 +87,28 @@ public class ComercioDto {
 		return localAtendimento;
 	}
 
-	public List<FormasPagamento> getFormasPagamento() {
-		return formasPagamento;
+	public boolean isPagamentoCartao() {
+		return pagamentoCartao;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
+	public boolean isPagamentoDinheiro() {
+		return pagamentoDinheiro;
 	}
 
-	public Categoria getCategoria() {
-		return categoria;
+	public String getIdCategoria() {
+		return idCategoria;
+	}
+
+	public String getIdEndereco() {
+		return idEndereco;
+	}
+	
+	public String getIdVendedor() {
+		return idVendedor;
 	}
 
 	public static Page<ComercioDto> converter(Page<Comercio> comercio) {
 		return comercio.map(ComercioDto::new);
 	}
+	
 }

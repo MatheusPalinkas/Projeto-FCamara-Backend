@@ -1,12 +1,9 @@
 package br.com.projetofcamara.projeto.controller.form;
 
 import java.time.LocalTime;
-import java.util.List;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import br.com.projetofcamara.projeto.entity.Categoria;
 import br.com.projetofcamara.projeto.entity.Comercio;
-import br.com.projetofcamara.projeto.enums.FormasPagamento;
 
 public class ComercioForm {
 	
@@ -16,8 +13,8 @@ public class ComercioForm {
 	private String cnpj;
 	@NotNull 
 	private double valorEntrega;
-	@NotNull @NotEmpty
-	private String tempoEntrega;	
+	@NotNull 
+	private LocalTime tempoEntrega;	
 	@NotNull
 	private LocalTime horarioAbertura;
 	@NotNull
@@ -26,10 +23,16 @@ public class ComercioForm {
 	private boolean possuiServicoEntrega;
 	@NotNull
 	private boolean localAtendimento;
-	@NotNull 
-	private List<FormasPagamento> formasPagamento;
 	@NotNull
-	private Categoria categoria;
+	private boolean pagamentoCartao;
+	@NotNull
+	private boolean pagamentoDinheiro;
+	@NotNull @NotEmpty
+	private String idCategoria;
+	@NotNull @NotEmpty
+	private String idEndereco;	
+	@NotNull @NotEmpty
+	private String idVendedor;
 	
 	public String getNome() {
 		return nome;
@@ -54,13 +57,7 @@ public class ComercioForm {
 	}
 	public void setValorEntrega(double valorEntrega) {
 		this.valorEntrega = valorEntrega;
-	}
-	public String getTempoEntrega() {
-		return tempoEntrega;
-	}
-	public void setTempoEntrega(String tempoEntrega) {
-		this.tempoEntrega = tempoEntrega;
-	}
+	}	
 	public LocalTime getHorarioAbertura() {
 		return horarioAbertura;
 	}
@@ -85,18 +82,43 @@ public class ComercioForm {
 	public void setLocalAtendimento(boolean localAtendimento) {
 		this.localAtendimento = localAtendimento;
 	}
-	public List<FormasPagamento> getFormasPagamento() {
-		return formasPagamento;
+	public LocalTime getTempoEntrega() {
+		return tempoEntrega;
 	}
-	public void setFormasPagamento(List<FormasPagamento> formasPagamento) {
-		this.formasPagamento = formasPagamento;
+	public void setTempoEntrega(LocalTime tempoEntrega) {
+		this.tempoEntrega = tempoEntrega;
+	}
+	public boolean isPagamentoCartao() {
+		return pagamentoCartao;
+	}
+	public void setPagamentoCartao(boolean pagamentoCartao) {
+		this.pagamentoCartao = pagamentoCartao;
+	}
+	public boolean isPagamentoDinheiro() {
+		return pagamentoDinheiro;
+	}
+	public void setPagamentoDinheiro(boolean pagamentoDinheiro) {
+		this.pagamentoDinheiro = pagamentoDinheiro;
+	}
+	public String getIdCategoria() {
+		return idCategoria;
+	}
+	public void setIdCategoria(String idCategoria) {
+		this.idCategoria = idCategoria;
+	}
+	public String getIdEndereco() {
+		return idEndereco;
+	}
+	public void setIdEndereco(String idEndereco) {
+		this.idEndereco = idEndereco;
+	}
+	public String getIdVendedor() {
+		return idVendedor;
+	}
+	public void setIdVendedor(String idVendedor) {
+		this.idVendedor = idVendedor;
 	}	
-	public Categoria getCategoria() {
-		return categoria;
-	}
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
+	
 	public Comercio converter() {
 		Comercio comercio = new Comercio();
 		comercio.setNome(nome);
@@ -108,11 +130,13 @@ public class ComercioForm {
 		comercio.setHorarioFechamento(horarioFechamento);
 		comercio.setPossuiServicoEntrega(possuiServicoEntrega);
 		comercio.setLocalAtendimento(localAtendimento);
-		comercio.setFormasPagamento(formasPagamento);
-		comercio.setCategoria(categoria);
+		comercio.setPagamentoCartao(pagamentoCartao);
+		comercio.setPagamentoDinheiro(pagamentoDinheiro);
+		comercio.setIdCategoria(idCategoria);
+		comercio.setIdEndereco(idEndereco);
+		comercio.setIdVendedor(idVendedor);
 		
 		return comercio;
 	}
-	
 	
 }

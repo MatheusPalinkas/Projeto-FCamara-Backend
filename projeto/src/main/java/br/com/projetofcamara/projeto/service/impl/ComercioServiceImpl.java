@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import br.com.projetofcamara.projeto.entity.Categoria;
 import br.com.projetofcamara.projeto.entity.Comercio;
 import br.com.projetofcamara.projeto.repository.ComercioRepository;
 import br.com.projetofcamara.projeto.service.ComercioService;
@@ -27,7 +26,8 @@ public class ComercioServiceImpl implements ComercioService{
 		
 		if(comercioBanco.isPresent()) {
 			comercioBanco.get().setPossuiServicoEntrega(comercio.isPossuiServicoEntrega());
-			comercioBanco.get().setFormasPagamento(comercio.getFormasPagamento());
+			comercioBanco.get().setPagamentoCartao(comercio.isPagamentoCartao());
+			comercioBanco.get().setPagamentoDinheiro(comercio.isPagamentoDinheiro());
 			comercioBanco.get().setHorarioAbertura(comercio.getHorarioAbertura());
 			comercioBanco.get().setHorarioFechamento(comercio.getHorarioFechamento());
 			comercioBanco.get().setLocalAtendimento(comercio.isLocalAtendimento());	
@@ -57,7 +57,7 @@ public class ComercioServiceImpl implements ComercioService{
 
 	@Override
 	public Page<Comercio> listarPorCategoria(String idCategoria, Pageable paginacao) {
-		return comercioRespository.findByCategoria(new Categoria(idCategoria), paginacao);
+		return comercioRespository.findByIdCategoria(idCategoria, paginacao);
 	}
 	
 }
