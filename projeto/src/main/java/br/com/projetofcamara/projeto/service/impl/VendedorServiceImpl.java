@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import br.com.projetofcamara.projeto.entity.Vendedor;
+import br.com.projetofcamara.projeto.exception.RegraDeNegocioException;
 import br.com.projetofcamara.projeto.repository.VendedorRepository;
 import br.com.projetofcamara.projeto.service.VendedorService;
 
@@ -28,9 +29,11 @@ public class VendedorServiceImpl implements VendedorService {
 		if(vendedorBd.isPresent()) {
 			vendedorBd.get().setNome(vendedor.getNome());
 			if (vendedor.getSenha() != null && !vendedor.getSenha().isEmpty()) {
-				vendedorBd.get().setSenha(vendedor.getSenha());
+				vendedorBd.get().setSenha(new BCryptPasswordEncoder().encode( vendedor.getSenha() ));
 			}
 			vendedorBd.get().setTelefone(vendedor.getTelefone());
+		}else {
+			throw new RegraDeNegocioException("Vendedor não existe");
 		}
 		
 		return Optional.ofNullable(vendedorRepository.save(vendedorBd.get()));

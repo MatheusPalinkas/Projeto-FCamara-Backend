@@ -12,4 +12,8 @@ public class Vendedor extends Usuario{
 		 this.tipoUsuario = TipoUsuario.VENDEDOR;
 	 }
 
+	public Vendedor(String id) {
+		this.id = id;
+	}
+
 }
