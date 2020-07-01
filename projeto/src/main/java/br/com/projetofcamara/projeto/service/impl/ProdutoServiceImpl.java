@@ -1,12 +1,13 @@
 package br.com.projetofcamara.projeto.service.impl;
 
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import br.com.projetofcamara.projeto.entity.Comercio;
 import br.com.projetofcamara.projeto.entity.Produto;
+import br.com.projetofcamara.projeto.exception.RegraDeNegocioException;
 import br.com.projetofcamara.projeto.repository.ProdutoRepository;
 import br.com.projetofcamara.projeto.service.ProdutoService;
 
@@ -31,6 +32,8 @@ public class ProdutoServiceImpl implements ProdutoService{
 			produtoBanco.get().setNome(produto.getNome());
 			produtoBanco.get().setPreco(produto.getPreco());			
 			produtoBanco.get().setUrlFoto(produto.getUrlFoto());			
+		}else {
+			throw new RegraDeNegocioException("Produto não existe");
 		}
 		return Optional.ofNullable(produtoRepository.save(produtoBanco.get()));
 	}
@@ -42,7 +45,7 @@ public class ProdutoServiceImpl implements ProdutoService{
 
 	@Override
 	public Page<Produto> listarProdutosDeUmComercio(String idComercio, Pageable paginacao) {
-		return produtoRepository.findByIdComercio(idComercio, paginacao);
+		return produtoRepository.findByComercio(new Comercio(idComercio), paginacao);
 	}
 	
 	@Override
@@ -68,6 +71,8 @@ public class ProdutoServiceImpl implements ProdutoService{
 		if(produtoBanco.isPresent()) {			
 			produtoBanco.get().setQuantidade(produto.getQuantidade());
 			produtoBanco.get().setProdutoEmEstoque(produto.isProdutoEmEstoque());			
+		}else {
+			throw new RegraDeNegocioException("Produto não existe");
 		}
 		return Optional.ofNullable(produtoRepository.save(produtoBanco.get()));
 	}

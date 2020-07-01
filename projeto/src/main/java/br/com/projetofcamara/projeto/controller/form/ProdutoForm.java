@@ -2,6 +2,8 @@ package br.com.projetofcamara.projeto.controller.form;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import br.com.projetofcamara.projeto.entity.Categoria;
+import br.com.projetofcamara.projeto.entity.Comercio;
 import br.com.projetofcamara.projeto.entity.Produto;
 
 public class ProdutoForm {
@@ -16,9 +18,9 @@ public class ProdutoForm {
 	private String descricao;
 	private String urlFoto;	
 	@NotNull @NotEmpty
-	private String idComercio;
+	private String codigoComercio;
 	@NotNull @NotEmpty
-	private String idCategoria;	
+	private String codigoCategoria;	
 	
 	public String getNome() {
 		return nome;
@@ -43,26 +45,25 @@ public class ProdutoForm {
 	}
 	public void setUrlFoto(String urlFoto) {
 		this.urlFoto = urlFoto;
-	}
-	
+	}	
 	public int getQuantidade() {
 		return quantidade;
 	}
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
 	}	
-	public String getIdComercio() {
-		return idComercio;
+	public String getCodigoComercio() {
+		return codigoComercio;
 	}
-	public void setIdComercio(String idComercio) {
-		this.idComercio = idComercio;
+	public void setCodigoComercio(String codigoComercio) {
+		this.codigoComercio = codigoComercio;
 	}
-	public String getIdCategoria() {
-		return idCategoria;
+	public String getCodigoCategoria() {
+		return codigoCategoria;
 	}
-	public void setIdCategoria(String idCategoria) {
-		this.idCategoria = idCategoria;
-	}	
+	public void setCodigoCategoria(String codigoCategoria) {
+		this.codigoCategoria = codigoCategoria;
+	}
 	
 	public Produto converter() {
 		Produto produto = new Produto();
@@ -71,10 +72,9 @@ public class ProdutoForm {
 		produto.setQuantidade(quantidade);
 		produto.setDescricao(descricao);
 		produto.setUrlFoto(urlFoto);		
-		produto.setIdComercio(idComercio);
-		produto.setIdCategoria(idCategoria);
+		produto.setComercio(new Comercio(codigoComercio));
+		produto.setCategoria( new Categoria(codigoCategoria));
 		
 		return produto;
-	}
-	
+	}	
 }

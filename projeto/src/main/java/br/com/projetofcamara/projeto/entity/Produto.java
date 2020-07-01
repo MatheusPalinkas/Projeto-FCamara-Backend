@@ -2,6 +2,7 @@ package br.com.projetofcamara.projeto.entity;
 
 import java.time.LocalDateTime;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
@@ -15,9 +16,11 @@ public class Produto {
 	private String descricao;
 	private LocalDateTime dataCriacao;
 	private String urlFoto;
-	private boolean produtoEmEstoque;	
-	private String idComercio;
-	private String idCategoria;
+	private boolean produtoEmEstoque;
+	@DBRef
+	private Comercio comercio;
+	@DBRef
+	private Categoria categoria;
 	
 	public Produto() {
 		this.produtoEmEstoque = true;
@@ -77,21 +80,21 @@ public class Produto {
 		this.produtoEmEstoque = produtoEmEstoque;
 	}
 
-	public String getIdComercio() {
-		return idComercio;
+	public Comercio getComercio() {
+		return comercio;
 	}
 
-	public void setIdComercio(String idComercio) {
-		this.idComercio = idComercio;
+	public void setComercio(Comercio comercio) {
+		this.comercio = comercio;
 	}
 
-	public String getIdCategoria() {
-		return idCategoria;
+	public Categoria getCategoria() {
+		return categoria;
 	}
 
-	public void setIdCategoria(String idCategoria) {
-		this.idCategoria = idCategoria;
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
-	
+		
 }
