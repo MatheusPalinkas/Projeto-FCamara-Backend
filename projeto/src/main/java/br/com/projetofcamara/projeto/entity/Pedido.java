@@ -1,7 +1,7 @@
 package br.com.projetofcamara.projeto.entity;
 
+import java.time.LocalDateTime;
 import java.util.List;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -13,8 +13,13 @@ public class Pedido {
 	@Id
 	private String id;
 	private String observacao;
+	private double frete;
+	private LocalDateTime dataCriacao;
+	private double subtotal;
 	private double total;
 	private StatusPedido statusPedido;
+	private Avaliacao avaliacaoDoCliente;
+	private Avaliacao avaliacaoDoComercio;
 	@DBRef
 	private Comercio comercio;
 	@DBRef
@@ -25,6 +30,7 @@ public class Pedido {
 	
 	public Pedido() {
 		this.statusPedido = StatusPedido.PENDENTE;
+		this.dataCriacao = LocalDateTime.now();
 	}
 	
 	public String getId() {
@@ -83,5 +89,45 @@ public class Pedido {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-		
+
+	public double getSubtotal() {
+		return subtotal;
+	}
+
+	public void setSubtotal(double subtotal) {
+		this.subtotal = subtotal;
+	}
+
+	public double getFrete() {
+		return frete;
+	}
+
+	public void setFrete(double frete) {
+		this.frete = frete;
+	}
+
+	public LocalDateTime getDataCriacao() {
+		return dataCriacao;
+	}
+
+	public void setDataCriacao(LocalDateTime dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+
+	public Avaliacao getAvaliacaoDoCliente() {
+		return avaliacaoDoCliente;
+	}
+
+	public void setAvaliacaoDoCliente(Avaliacao avaliacaoDoCliente) {
+		this.avaliacaoDoCliente = avaliacaoDoCliente;
+	}
+
+	public Avaliacao getAvaliacaoDoComercio() {
+		return avaliacaoDoComercio;
+	}
+
+	public void setAvaliacaoDoComercio(Avaliacao avaliacaoDoComercio) {
+		this.avaliacaoDoComercio = avaliacaoDoComercio;
+	}
+
 }
