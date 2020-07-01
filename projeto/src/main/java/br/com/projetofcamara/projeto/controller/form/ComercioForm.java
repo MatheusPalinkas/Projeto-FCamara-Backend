@@ -3,7 +3,10 @@ package br.com.projetofcamara.projeto.controller.form;
 import java.time.LocalTime;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import br.com.projetofcamara.projeto.entity.Categoria;
 import br.com.projetofcamara.projeto.entity.Comercio;
+import br.com.projetofcamara.projeto.entity.Endereco;
+import br.com.projetofcamara.projeto.entity.Vendedor;
 
 public class ComercioForm {
 	
@@ -28,11 +31,11 @@ public class ComercioForm {
 	@NotNull
 	private boolean pagamentoDinheiro;
 	@NotNull @NotEmpty
-	private String idCategoria;
+	private String codigoCategoria;
 	@NotNull @NotEmpty
-	private String idEndereco;	
+	private String codigoEndereco;	
 	@NotNull @NotEmpty
-	private String idVendedor;
+	private String codigoVendedor;
 	
 	public String getNome() {
 		return nome;
@@ -100,24 +103,24 @@ public class ComercioForm {
 	public void setPagamentoDinheiro(boolean pagamentoDinheiro) {
 		this.pagamentoDinheiro = pagamentoDinheiro;
 	}
-	public String getIdCategoria() {
-		return idCategoria;
+	public String getCodigoCategoria() {
+		return codigoCategoria;
 	}
-	public void setIdCategoria(String idCategoria) {
-		this.idCategoria = idCategoria;
+	public void setCodigoCategoria(String codigoCategoria) {
+		this.codigoCategoria = codigoCategoria;
 	}
-	public String getIdEndereco() {
-		return idEndereco;
+	public String getCodigoEndereco() {
+		return codigoEndereco;
 	}
-	public void setIdEndereco(String idEndereco) {
-		this.idEndereco = idEndereco;
+	public void setCodigoEndereco(String codigoEndereco) {
+		this.codigoEndereco = codigoEndereco;
 	}
-	public String getIdVendedor() {
-		return idVendedor;
+	public String getCodigoVendedor() {
+		return codigoVendedor;
 	}
-	public void setIdVendedor(String idVendedor) {
-		this.idVendedor = idVendedor;
-	}	
+	public void setCodigoVendedor(String codigoVendedor) {
+		this.codigoVendedor = codigoVendedor;
+	}
 	
 	public Comercio converter() {
 		Comercio comercio = new Comercio();
@@ -132,11 +135,10 @@ public class ComercioForm {
 		comercio.setLocalAtendimento(localAtendimento);
 		comercio.setPagamentoCartao(pagamentoCartao);
 		comercio.setPagamentoDinheiro(pagamentoDinheiro);
-		comercio.setIdCategoria(idCategoria);
-		comercio.setIdEndereco(idEndereco);
-		comercio.setIdVendedor(idVendedor);
+		comercio.setEndereco(new Endereco (codigoEndereco));
+		comercio.setVendedor(new Vendedor (codigoVendedor));
+		comercio.setCategoria(new Categoria (codigoCategoria));
 		
 		return comercio;
-	}
-	
+	}	
 }
