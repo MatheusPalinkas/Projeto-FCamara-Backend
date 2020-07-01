@@ -1,9 +1,7 @@
 package br.com.projetofcamara.projeto.controller;
 
 import java.util.Optional;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,9 +14,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import br.com.projetofcamara.projeto.controller.dto.PedidoDto;
+import br.com.projetofcamara.projeto.controller.form.AvaliarPedidoForm;
 import br.com.projetofcamara.projeto.controller.form.PedidoForm;
+import br.com.projetofcamara.projeto.entity.Avaliacao;
 import br.com.projetofcamara.projeto.entity.Pedido;
 import br.com.projetofcamara.projeto.enums.StatusPedido;
 import br.com.projetofcamara.projeto.service.PedidoService;
@@ -46,7 +45,7 @@ public class PedidoController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<PedidoDto> criarPedido(@RequestBody @Valid PedidoForm form ) throws Exception{
+	public ResponseEntity<PedidoDto> criarPedido(@RequestBody @Valid PedidoForm form ){
 		Pedido pedido = form.converter();
 		
 		Optional<Pedido> pedidoBd = pedidoService.criarPedido(pedido);
@@ -99,6 +98,18 @@ public class PedidoController {
 			return ResponseEntity.ok( new PedidoDto(pedidoBd.get()));
 		}
 		
+		return ResponseEntity.notFound().build();
+	}
+	
+	@PostMapping("/{idPedido}/avaliar/{avaliado}")
+	public ResponseEntity<PedidoDto> avaliarPedido(@PathVariable String avaliado,@PathVariable String idPedido, @RequestBody @Valid AvaliarPedidoForm avaliarPedidoForm ){
+		
+		Avaliacao avaliaPedido = avaliarPedidoForm.converter();
+		
+		Optional<Pedido> avaliaBd = pedidoService.criarAvaliacao(avaliaPedido, avaliado, idPedido);
+		if(avaliaBd.isPresent()) {
+			return new ResponseEntity<>( new PedidoDto(avaliaBd.get()), HttpStatus.CREATED);
+		}
 		return ResponseEntity.notFound().build();
 	}
 }

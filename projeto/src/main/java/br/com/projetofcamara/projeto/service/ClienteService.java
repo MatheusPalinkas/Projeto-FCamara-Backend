@@ -1,6 +1,8 @@
 package br.com.projetofcamara.projeto.service;
 
 import java.util.Optional;
+
+import br.com.projetofcamara.projeto.entity.Avaliacao;
 import br.com.projetofcamara.projeto.entity.Cliente;
 
 public interface ClienteService {	
@@ -12,4 +14,6 @@ public interface ClienteService {
 	Optional<Cliente> buscarClientePeloId(String id);	
 	
 	void excluirCliente(String id);
+
+	void novaAvaliacao(Avaliacao avaliaPedido);
 }

@@ -1,9 +1,11 @@
 package br.com.projetofcamara.projeto.service;
 
 import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import br.com.projetofcamara.projeto.entity.Avaliacao;
 import br.com.projetofcamara.projeto.entity.Comercio;
 
 public interface ComercioService {	
@@ -19,5 +21,7 @@ public interface ComercioService {
 	Page<Comercio> listarPorNome(String nome, Pageable paginacao);
 
 	Page<Comercio> listarPorCategoria(String idCategoria, Pageable paginacao);
+
+	void novaAvaliacao(Avaliacao avaliaPedido);
 				
 }

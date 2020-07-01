@@ -1,9 +1,9 @@
 package br.com.projetofcamara.projeto.controller.dto;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.domain.Page;
-import br.com.projetofcamara.projeto.entity.Cliente;
-import br.com.projetofcamara.projeto.entity.Comercio;
+import br.com.projetofcamara.projeto.entity.Avaliacao;
 import br.com.projetofcamara.projeto.entity.Endereco;
 import br.com.projetofcamara.projeto.entity.ItemPedido;
 import br.com.projetofcamara.projeto.entity.Pedido;
@@ -13,10 +13,15 @@ public class PedidoDto {
 
 	private String id;
 	private String observacao;
+	private double subtotal;
+	private LocalDateTime dataCriacao;
+	private double frete;	
 	private double total;
 	private StatusPedido statusPedido;
-	private Comercio comercio;
-	private Cliente cliente;
+	private Avaliacao avaliacaoDoCliente;
+	private Avaliacao avaliacaoDoComercio;
+	private CodigoNomeDto comercio;
+	private CodigoNomeDto cliente;
 	private Endereco endereco;
 	private List<ItemPedido> itensPedido;
 	
@@ -24,11 +29,16 @@ public class PedidoDto {
 		this.id = pedido.getId();
 		this.observacao = pedido.getObservacao();
 		this.total = pedido.getTotal();
+		this.frete = pedido.getFrete();
+		this.subtotal = pedido.getSubtotal();
 		this.statusPedido = pedido.getStatusPedido();
-		this.comercio = pedido.getComercio();
-		this.cliente = pedido.getCliente();
+		this.cliente = new CodigoNomeDto(pedido.getCliente().getId(), pedido.getCliente().getNome());
+		this.comercio = new CodigoNomeDto(pedido.getComercio().getId(), pedido.getComercio().getNome());
 		this.endereco = pedido.getEndereco();
 		this.itensPedido = pedido.getItensPedido();
+		this.avaliacaoDoCliente = pedido.getAvaliacaoDoCliente();
+		this.avaliacaoDoComercio = pedido.getAvaliacaoDoComercio();
+		this.dataCriacao = pedido.getDataCriacao();
 	}
 
 	public String getId() {
@@ -42,15 +52,7 @@ public class PedidoDto {
 	public StatusPedido getStatusPedido() {
 		return statusPedido;
 	}
-
-	public Comercio getComercio() {
-		return comercio;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
+	
 	public Endereco getEndereco() {
 		return endereco;
 	}
@@ -63,6 +65,34 @@ public class PedidoDto {
 		return itensPedido;
 	}
 
+	public double getSubtotal() {
+		return subtotal;
+	}
+
+	public double getFrete() {
+		return frete;
+	}
+
+	public CodigoNomeDto getComercio() {
+		return comercio;
+	}
+
+	public CodigoNomeDto getCliente() {
+		return cliente;
+	}
+		
+	public LocalDateTime getDataCriacao() {
+		return dataCriacao;
+	}	
+	
+	public Avaliacao getAvaliacaoDoCliente() {
+		return avaliacaoDoCliente;
+	}
+
+	public Avaliacao getAvaliacaoDoComercio() {
+		return avaliacaoDoComercio;
+	}	
+	
 	public static Page<PedidoDto> converter(Page<Pedido> pedido) {
 		return pedido.map(PedidoDto::new);
 	}

@@ -10,11 +10,13 @@ import br.com.projetofcamara.projeto.enums.TipoUsuario;
 public class Cliente extends Usuario {
 
 	private static final long serialVersionUID = 1L;
+	
+	private double mediaAvaliacoes;
 	@DBRef
 	private List<Endereco> endereco;
 	
 	public Cliente() {
-		 this.tipoUsuario = TipoUsuario.CLIENTE;
+		 this.tipoUsuario = TipoUsuario.CLIENTE;		 
 	 }
 
 	public Cliente(String id) {
@@ -27,6 +29,14 @@ public class Cliente extends Usuario {
 
 	public void setEndereco(List<Endereco> endereco) {
 		this.endereco = endereco;
+	}
+
+	public double getMediaAvaliacoes() {
+		return mediaAvaliacoes;
+	}
+
+	public void setMediaAvaliacoes(double mediaAvaliacoes) {
+		this.mediaAvaliacoes = mediaAvaliacoes;
 	}
 
 }

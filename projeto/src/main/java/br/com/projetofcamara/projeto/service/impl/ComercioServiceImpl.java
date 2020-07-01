@@ -5,15 +5,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import br.com.projetofcamara.projeto.entity.Avaliacao;
+import br.com.projetofcamara.projeto.entity.Categoria;
 import br.com.projetofcamara.projeto.entity.Comercio;
+import br.com.projetofcamara.projeto.exception.RegraDeNegocioException;
 import br.com.projetofcamara.projeto.repository.ComercioRepository;
 import br.com.projetofcamara.projeto.service.ComercioService;
+import br.com.projetofcamara.projeto.service.PedidoService;
 
 @Service
 public class ComercioServiceImpl implements ComercioService{
 	
 	@Autowired
 	ComercioRepository comercioRespository;
+	
+	@Autowired
+	PedidoService pedidoService;
 
 	@Override
 	public Optional<Comercio> criarComercio(Comercio comercio) {
@@ -34,6 +41,9 @@ public class ComercioServiceImpl implements ComercioService{
 			comercioBanco.get().setTempoEntrega(comercio.getTempoEntrega());
 			comercioBanco.get().setUrlFoto(comercio.getUrlFoto());
 			comercioBanco.get().setValorEntrega(comercio.getValorEntrega());
+			comercioBanco.get().setMediaAvaliacoes(comercio.getMediaAvaliacoes());
+		}else {
+			throw new RegraDeNegocioException("Comercio não existe");
 		}
 		
 		return Optional.ofNullable(comercioRespository.save(comercioBanco.get()));
@@ -57,7 +67,25 @@ public class ComercioServiceImpl implements ComercioService{
 
 	@Override
 	public Page<Comercio> listarPorCategoria(String idCategoria, Pageable paginacao) {
-		return comercioRespository.findByIdCategoria(idCategoria, paginacao);
+		return comercioRespository.findByCategoria(new Categoria(idCategoria), paginacao);
+	}
+
+	@Override
+	public void novaAvaliacao(Avaliacao avaliacaoComercio) {
+		
+		Optional<Comercio> comercioAvaliado = this.buscarComercioPeloId(avaliacaoComercio.getCodigoAvaliado());
+		
+		if(comercioAvaliado.isPresent()) {
+			double mediaAvaliacoesAtualizada = comercioAvaliado.get().getMediaAvaliacoes();
+			mediaAvaliacoesAtualizada = mediaAvaliacoesAtualizada == 0.0 ? 5.0 : mediaAvaliacoesAtualizada;
+			mediaAvaliacoesAtualizada = ( mediaAvaliacoesAtualizada + avaliacaoComercio.getNotaPedido().getValor() ) / 2;
+			
+			if(comercioAvaliado.get().getMediaAvaliacoes() != mediaAvaliacoesAtualizada) {
+				comercioAvaliado.get().setMediaAvaliacoes(mediaAvaliacoesAtualizada);
+				this.alterarComercio(comercioAvaliado.get());
+			}
+		}
+		
 	}
 	
 }

@@ -3,6 +3,7 @@ package br.com.projetofcamara.projeto.entity;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
@@ -22,10 +23,13 @@ public class Comercio {
 	private boolean localAtendimento;
 	private boolean pagamentoCartao;
 	private boolean pagamentoDinheiro;
-	private String idCategoria;
-	private String idEndereco;
-	private String idVendedor;
-	
+	@DBRef
+	private Categoria categoria;
+	@DBRef
+	private Endereco endereco;
+	@DBRef
+	private Vendedor vendedor;	
+	private double mediaAvaliacoes;
 	
 	public Comercio() {
 		this.possuiServicoEntrega = true;
@@ -133,22 +137,6 @@ public class Comercio {
 		this.pagamentoDinheiro = pagamentoDinheiro;
 	}
 
-	public String getIdCategoria() {
-		return idCategoria;
-	}
-
-	public void setIdCategoria(String idCategoria) {
-		this.idCategoria = idCategoria;
-	}
-
-	public String getIdEndereco() {
-		return idEndereco;
-	}
-
-	public void setIdEndereco(String idEndereco) {
-		this.idEndereco = idEndereco;
-	}
-
 	public LocalTime getTempoEntrega() {
 		return tempoEntrega;
 	}
@@ -157,12 +145,36 @@ public class Comercio {
 		this.tempoEntrega = tempoEntrega;
 	}
 
-	public String getIdVendedor() {
-		return idVendedor;
+	public Categoria getCategoria() {
+		return categoria;
 	}
 
-	public void setIdVendedor(String idVendedor) {
-		this.idVendedor = idVendedor;
-	}	
-	
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public Vendedor getVendedor() {
+		return vendedor;
+	}
+
+	public void setVendedor(Vendedor vendedor) {
+		this.vendedor = vendedor;
+	}
+
+	public double getMediaAvaliacoes() {
+		return mediaAvaliacoes;
+	}
+
+	public void setMediaAvaliacoes(double mediaAvaliacoes) {
+		this.mediaAvaliacoes = mediaAvaliacoes;
+	}
+
 }
