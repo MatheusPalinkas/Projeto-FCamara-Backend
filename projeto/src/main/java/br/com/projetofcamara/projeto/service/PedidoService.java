@@ -3,11 +3,12 @@ package br.com.projetofcamara.projeto.service;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import br.com.projetofcamara.projeto.entity.Avaliacao;
 import br.com.projetofcamara.projeto.entity.Pedido;
 
 public interface PedidoService {	
 		
-	Optional<Pedido> criarPedido(Pedido pedido) throws Exception;
+	Optional<Pedido> criarPedido(Pedido pedido);
 
 	Optional<Pedido> buscarPedidoId(String id);	
 	
@@ -22,4 +23,7 @@ public interface PedidoService {
 	Optional<Pedido> enviarPedido(Pedido pedido);
 	
 	Optional<Pedido> entregarPedido(Pedido pedido);
+
+	Optional<Pedido> criarAvaliacao(Avaliacao avaliaPedido, String avaliado, String idPedido);
+		
 }
