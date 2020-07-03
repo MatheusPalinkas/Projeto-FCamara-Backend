@@ -6,7 +6,6 @@ import javax.validation.constraints.NotNull;
 import br.com.projetofcamara.projeto.entity.Categoria;
 import br.com.projetofcamara.projeto.entity.Comercio;
 import br.com.projetofcamara.projeto.entity.Endereco;
-import br.com.projetofcamara.projeto.entity.Vendedor;
 
 public class ComercioForm {
 	
@@ -34,8 +33,6 @@ public class ComercioForm {
 	private String codigoCategoria;
 	@NotNull @NotEmpty
 	private String codigoEndereco;	
-	@NotNull @NotEmpty
-	private String codigoVendedor;
 	
 	public String getNome() {
 		return nome;
@@ -115,13 +112,7 @@ public class ComercioForm {
 	public void setCodigoEndereco(String codigoEndereco) {
 		this.codigoEndereco = codigoEndereco;
 	}
-	public String getCodigoVendedor() {
-		return codigoVendedor;
-	}
-	public void setCodigoVendedor(String codigoVendedor) {
-		this.codigoVendedor = codigoVendedor;
-	}
-	
+		
 	public Comercio converter() {
 		Comercio comercio = new Comercio();
 		comercio.setNome(nome);
@@ -135,8 +126,7 @@ public class ComercioForm {
 		comercio.setLocalAtendimento(localAtendimento);
 		comercio.setPagamentoCartao(pagamentoCartao);
 		comercio.setPagamentoDinheiro(pagamentoDinheiro);
-		comercio.setEndereco(new Endereco (codigoEndereco));
-		comercio.setVendedor(new Vendedor (codigoVendedor));
+		comercio.setEndereco(new Endereco (codigoEndereco));		
 		comercio.setCategoria(new Categoria (codigoCategoria));
 		
 		return comercio;

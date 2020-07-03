@@ -13,6 +13,7 @@ public class ClienteForm extends UsuarioForm{
 		cliente.setDataNascimento(dataNascimento);
 		cliente.setCpf(cpf);
 		cliente.setTelefone(telefone);	
+		cliente.setUrlFoto(urlFoto);
 		
 		return cliente;
 	}	

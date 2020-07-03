@@ -1,7 +1,6 @@
 package br.com.projetofcamara.projeto.controller.dto;
 
 import java.time.LocalDate;
-
 import br.com.projetofcamara.projeto.entity.Usuario;
 import br.com.projetofcamara.projeto.enums.TipoUsuario;
 
@@ -14,7 +13,8 @@ public class UsuarioDto {
 	private String cpf;
 	private String telefone;	
 	private TipoUsuario tipoUsuario;
-	
+	private String urlFoto;
+		
 	public UsuarioDto(Usuario usuario) {
 		
 		this.id = usuario.getId();
@@ -23,7 +23,8 @@ public class UsuarioDto {
 		this.dataNascimento = usuario.getDataNascimento();
 		this.cpf = usuario.getCpf();
 		this.telefone = usuario.getTelefone();	
-		this.tipoUsuario = usuario.getTipoUsuario();
+		this.tipoUsuario = usuario.getTipoUsuario();		
+		this.urlFoto = usuario.getUrlFoto();
 	}
 
 	public UsuarioDto(String id) {
@@ -56,6 +57,10 @@ public class UsuarioDto {
 
 	public TipoUsuario getTipoUsuario() {
 		return tipoUsuario;
-	}	
+	}
+
+	public String getUrlFoto() {
+		return urlFoto;
+	}
 	
 }

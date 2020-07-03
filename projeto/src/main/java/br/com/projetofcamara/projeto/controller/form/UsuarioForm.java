@@ -22,6 +22,9 @@ public class UsuarioForm {
 	protected String cpf;
 	@NotNull @NotEmpty 
 	protected String telefone;
+	protected String urlFoto;
+	protected String codigoComercio;
+	
 		
 	public LocalDate getDataNascimento() {
 		return dataNascimento;
@@ -69,5 +72,21 @@ public class UsuarioForm {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public String getUrlFoto() {
+		return urlFoto;
+	}
+
+	public void setUrlFoto(String urlFoto) {
+		this.urlFoto = urlFoto;
+	}
+
+	public String getCodigoComercio() {
+		return codigoComercio;
+	}
+
+	public void setCodigoComercio(String codigoComercio) {
+		this.codigoComercio = codigoComercio;
 	}
 }

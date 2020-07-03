@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import br.com.projetofcamara.projeto.entity.Avaliacao;
+import br.com.projetofcamara.projeto.entity.Cliente;
+import br.com.projetofcamara.projeto.entity.Comercio;
 import br.com.projetofcamara.projeto.entity.Endereco;
 import br.com.projetofcamara.projeto.entity.ItemPedido;
 import br.com.projetofcamara.projeto.entity.Pedido;
@@ -20,8 +22,8 @@ public class PedidoDto {
 	private StatusPedido statusPedido;
 	private Avaliacao avaliacaoDoCliente;
 	private Avaliacao avaliacaoDoComercio;
-	private CodigoNomeDto comercio;
-	private CodigoNomeDto cliente;
+	private Comercio comercio;
+	private Cliente cliente;
 	private Endereco endereco;
 	private List<ItemPedido> itensPedido;
 	
@@ -32,8 +34,8 @@ public class PedidoDto {
 		this.frete = pedido.getFrete();
 		this.subtotal = pedido.getSubtotal();
 		this.statusPedido = pedido.getStatusPedido();
-		this.cliente = new CodigoNomeDto(pedido.getCliente().getId(), pedido.getCliente().getNome());
-		this.comercio = new CodigoNomeDto(pedido.getComercio().getId(), pedido.getComercio().getNome());
+		this.cliente = pedido.getCliente();
+		this.comercio = pedido.getComercio();
 		this.endereco = pedido.getEndereco();
 		this.itensPedido = pedido.getItensPedido();
 		this.avaliacaoDoCliente = pedido.getAvaliacaoDoCliente();
@@ -71,15 +73,7 @@ public class PedidoDto {
 
 	public double getFrete() {
 		return frete;
-	}
-
-	public CodigoNomeDto getComercio() {
-		return comercio;
-	}
-
-	public CodigoNomeDto getCliente() {
-		return cliente;
-	}
+	}	
 		
 	public LocalDateTime getDataCriacao() {
 		return dataCriacao;
@@ -93,8 +87,16 @@ public class PedidoDto {
 		return avaliacaoDoComercio;
 	}	
 	
+	public Comercio getComercio() {
+		return comercio;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+	
 	public static Page<PedidoDto> converter(Page<Pedido> pedido) {
 		return pedido.map(PedidoDto::new);
-	}
+	}	
 
 }

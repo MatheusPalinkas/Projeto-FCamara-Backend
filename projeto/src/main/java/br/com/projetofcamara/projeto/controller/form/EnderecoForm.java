@@ -20,9 +20,7 @@ public class EnderecoForm {
 	private String uf;
 	@NotNull @NotEmpty 
 	private String complemento;
-	@NotNull @NotEmpty
-	private String codigoDetentor;
-	
+		
 	public String getCep() {
 		return cep;
 	}
@@ -65,12 +63,6 @@ public class EnderecoForm {
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}	
-	public String getCodigoDetentor() {
-		return codigoDetentor;
-	}
-	public void setCodigoDetentor(String codigoDetentor) {
-		this.codigoDetentor = codigoDetentor;
-	}	
 	
 	public Endereco converter() {
 		
@@ -82,8 +74,7 @@ public class EnderecoForm {
 		endereco.setUf(uf);
 		endereco.setBairro(bairro);
 		endereco.setCep(cep);
-		endereco.setCodigoDetentor(codigoDetentor);
-		
+				
 		return endereco;
 	}	
 }

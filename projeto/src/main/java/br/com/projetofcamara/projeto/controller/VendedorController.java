@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import br.com.projetofcamara.projeto.controller.dto.UsuarioDto;
+import br.com.projetofcamara.projeto.controller.dto.VendedorDto;
 import br.com.projetofcamara.projeto.controller.form.AtualizaVendedorForm;
 import br.com.projetofcamara.projeto.controller.form.VendedorForm;
 import br.com.projetofcamara.projeto.entity.Vendedor;
@@ -27,38 +27,38 @@ public class VendedorController {
 	VendedorService vendedorService;
 	
 	@PostMapping
-	public ResponseEntity<UsuarioDto> cadastrar(@RequestBody @Valid VendedorForm form) {
+	public ResponseEntity<VendedorDto> cadastrar(@RequestBody @Valid VendedorForm form) {
 		
 		Vendedor vendedor = form.converter();
 		Optional<Vendedor> vendedorBd = vendedorService.criarVendedor(vendedor);
 		
 		if(vendedorBd.isPresent()) {
-			return new ResponseEntity<>(new UsuarioDto(vendedorBd.get()), HttpStatus.CREATED);
+			return new ResponseEntity<>(new VendedorDto(vendedorBd.get()), HttpStatus.CREATED);
 		}
 		
-		return ResponseEntity.badRequest().body(new UsuarioDto(vendedor));
+		return ResponseEntity.badRequest().body(new VendedorDto(vendedor));
 	}
 	
 	@PutMapping()
-	public ResponseEntity<UsuarioDto> atualizar( @RequestBody @Valid AtualizaVendedorForm form) {
+	public ResponseEntity<VendedorDto> atualizar( @RequestBody @Valid AtualizaVendedorForm form) {
 		
 		Vendedor vendedor = form.converter();
 		Optional<Vendedor> vendedorBd = vendedorService.alterarVendedor(vendedor);
 		
 		if(vendedorBd.isPresent()) {
-			return new ResponseEntity<>(new UsuarioDto(vendedorBd.get()), HttpStatus.OK);
+			return new ResponseEntity<>(new VendedorDto(vendedorBd.get()), HttpStatus.OK);
 		}
 		
-		return ResponseEntity.badRequest().body(new UsuarioDto(vendedor));		
+		return ResponseEntity.badRequest().body(new VendedorDto(vendedor));		
 	}	
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<UsuarioDto> buscarPorId(@PathVariable String id){
+	public ResponseEntity<VendedorDto> buscarPorId(@PathVariable String id){
 		
 		Optional<Vendedor> vendedorBd = vendedorService.buscarVendedorPeloId(id);
 		
 		if(vendedorBd.isPresent()) {
-			return ResponseEntity.ok( new UsuarioDto(vendedorBd.get()));
+			return ResponseEntity.ok( new VendedorDto(vendedorBd.get()));
 		}
 		
 		return ResponseEntity.notFound().build();

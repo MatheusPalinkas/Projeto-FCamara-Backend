@@ -1,7 +1,6 @@
 package br.com.projetofcamara.projeto.entity;
 
 import java.io.Serializable;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import br.com.projetofcamara.projeto.enums.TipoDetentor;
@@ -15,6 +14,7 @@ public class Endereco implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	private String id;	
+	private String nome;
 	private String cep;	
 	private String cidade;
 	private String logradouro;
@@ -116,5 +116,13 @@ public class Endereco implements Serializable {
 
 	public void setCodigoDetentor(String codigoDetentor) {
 		this.codigoDetentor = codigoDetentor;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}	
 }

@@ -26,9 +26,7 @@ public class Comercio {
 	@DBRef
 	private Categoria categoria;
 	@DBRef
-	private Endereco endereco;
-	@DBRef
-	private Vendedor vendedor;	
+	private Endereco endereco;	
 	private double mediaAvaliacoes;
 	
 	public Comercio() {
@@ -160,21 +158,12 @@ public class Comercio {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-
-	public Vendedor getVendedor() {
-		return vendedor;
-	}
-
-	public void setVendedor(Vendedor vendedor) {
-		this.vendedor = vendedor;
-	}
-
+	
 	public double getMediaAvaliacoes() {
 		return mediaAvaliacoes;
 	}
 
 	public void setMediaAvaliacoes(double mediaAvaliacoes) {
 		this.mediaAvaliacoes = mediaAvaliacoes;
-	}
-
+	}	
 }

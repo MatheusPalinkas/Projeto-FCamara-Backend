@@ -22,8 +22,7 @@ public class ComercioDto {
 	private boolean pagamentoDinheiro;
 	private CodigoNomeDto categoria;
 	private String codigoEndereco;
-	private CodigoNomeDto vendedor;
-	
+		
 	public ComercioDto(Comercio comercio) {
 		this.id = comercio.getId();
 		this.nome = comercio.getNome();
@@ -39,8 +38,7 @@ public class ComercioDto {
 		this.localAtendimento = comercio.isLocalAtendimento();
 		this.possuiServicoEntrega = comercio.isPossuiServicoEntrega();
 		this.categoria = new CodigoNomeDto(comercio.getCategoria().getId(), comercio.getCategoria().getNome());
-		this.codigoEndereco = comercio.getEndereco().getId();
-		this.vendedor = new CodigoNomeDto(comercio.getVendedor().getId(), comercio.getVendedor().getNome());
+		this.codigoEndereco = comercio.getEndereco().getId();		
 	}
 
 	public String getId() {
@@ -102,11 +100,7 @@ public class ComercioDto {
 	public CodigoNomeDto getCategoria() {
 		return categoria;
 	}
-
-	public CodigoNomeDto getVendedor() {
-		return vendedor;
-	}
-
+	
 	public static Page<ComercioDto> converter(Page<Comercio> comercio) {
 		return comercio.map(ComercioDto::new);
 	}	

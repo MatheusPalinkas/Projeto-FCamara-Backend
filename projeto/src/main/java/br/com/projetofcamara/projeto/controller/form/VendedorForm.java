@@ -13,6 +13,8 @@ public class VendedorForm extends UsuarioForm{
 		vendedor.setDataNascimento(dataNascimento);
 		vendedor.setCpf(cpf);
 		vendedor.setTelefone(telefone);	
+		vendedor.setUrlFoto(urlFoto);
+		vendedor.setCodigoComercio(codigoComercio);
 		
 		return vendedor;
 	}		
