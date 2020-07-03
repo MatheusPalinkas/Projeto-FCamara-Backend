@@ -1,9 +1,9 @@
 package br.com.projetofcamara.projeto.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import br.com.projetofcamara.projeto.enums.TipoUsuario;
 
 @Document("usuario")
@@ -14,9 +14,12 @@ public class Cliente extends Usuario {
 	private double mediaAvaliacoes;
 	@DBRef
 	private List<Endereco> endereco;
+	private List<Favorito> favoritos;
 	
 	public Cliente() {
-		 this.tipoUsuario = TipoUsuario.CLIENTE;		 
+		 this.tipoUsuario = TipoUsuario.CLIENTE;	
+		 endereco = new ArrayList<Endereco>();
+		 favoritos = new ArrayList<Favorito>();
 	 }
 
 	public Cliente(String id) {
@@ -39,4 +42,11 @@ public class Cliente extends Usuario {
 		this.mediaAvaliacoes = mediaAvaliacoes;
 	}
 
+	public List<Favorito> getFavoritos() {
+		return favoritos;
+	}
+
+	public void setFavoritos(List<Favorito> favoritos) {
+		this.favoritos = favoritos;
+	}
 }

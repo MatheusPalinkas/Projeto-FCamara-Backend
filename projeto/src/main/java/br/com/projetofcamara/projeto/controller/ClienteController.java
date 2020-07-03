@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import br.com.projetofcamara.projeto.controller.dto.UsuarioDto;
+import br.com.projetofcamara.projeto.controller.dto.ClienteDto;
 import br.com.projetofcamara.projeto.controller.form.AtualizaClienteForm;
 import br.com.projetofcamara.projeto.controller.form.ClienteForm;
 import br.com.projetofcamara.projeto.entity.Cliente;
@@ -27,39 +27,39 @@ public class ClienteController {
 	ClienteService clienteService;
 	
 	@PostMapping
-	public ResponseEntity<UsuarioDto> cadastrar(@RequestBody @Valid ClienteForm clienteForm){
+	public ResponseEntity<ClienteDto> cadastrar(@RequestBody @Valid ClienteForm clienteForm){
 		
 		Cliente cliente = clienteForm.converter();
 		
 		Optional<Cliente> clienteBd = clienteService.criarCliente(cliente);
 		
 		if(clienteBd.isPresent()) {
-			return new ResponseEntity<>( new UsuarioDto(clienteBd.get()), HttpStatus.CREATED);
+			return new ResponseEntity<>( new ClienteDto(clienteBd.get()), HttpStatus.CREATED);
 		}
 		
-		return ResponseEntity.badRequest().body(new UsuarioDto(cliente));
+		return ResponseEntity.badRequest().body(new ClienteDto(cliente));
 	}
 	
 	@PutMapping
-	public ResponseEntity<UsuarioDto> atualizar( @RequestBody @Valid AtualizaClienteForm form) {
+	public ResponseEntity<ClienteDto> atualizar( @RequestBody @Valid AtualizaClienteForm form) {
 		
 		Cliente cliente = form.converter();
 		Optional<Cliente> clienteBd = clienteService.alterarCliente(cliente);
 		
 		if(clienteBd.isPresent()) {
-			return new ResponseEntity<>(new UsuarioDto(clienteBd.get()), HttpStatus.OK);
+			return new ResponseEntity<>(new ClienteDto(clienteBd.get()), HttpStatus.OK);
 		}
 		
-		return ResponseEntity.badRequest().body(new UsuarioDto(cliente));	
+		return ResponseEntity.badRequest().body(new ClienteDto(cliente));	
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<UsuarioDto> buscarPorId(@PathVariable String id){
+	public ResponseEntity<ClienteDto> buscarPorId(@PathVariable String id){
 		
 		Optional<Cliente> clienteBd = clienteService.buscarClientePeloId(id);
 		
 		if(clienteBd.isPresent()) {
-			return ResponseEntity.ok( new UsuarioDto(clienteBd.get()));
+			return ResponseEntity.ok( new ClienteDto(clienteBd.get()));
 		}
 		
 		return ResponseEntity.notFound().build();
@@ -77,4 +77,27 @@ public class ClienteController {
 		
 		return ResponseEntity.notFound().build();
 	}
+	
+	@PostMapping("/{idCliente}/favoritar/{idComercio}")
+	public ResponseEntity<ClienteDto> favoritarComercio(@PathVariable String idComercio, @PathVariable String idCliente){
+		
+		Optional<Cliente> clienteBd = clienteService.favoritarComercio(idCliente, idComercio);
+		
+		if(clienteBd.isPresent()) {
+			return new ResponseEntity<>( new ClienteDto(clienteBd.get()), HttpStatus.CREATED);
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
+	
+	@DeleteMapping("/{idCliente}/remover/{idComercio}")
+	public ResponseEntity<?> removerComercioFavorito(@PathVariable String idComercio, @PathVariable String idCliente){
+
+		Optional<Cliente> clienteBd = clienteService.buscarClientePeloId(idCliente);
+		if(clienteBd.isPresent()) {
+			clienteService.removerComercioFavorito(idCliente, idComercio);
+			return ResponseEntity.ok().build();
+		}		
+		return ResponseEntity.notFound().build();
+	}		
 }
