@@ -1,15 +1,14 @@
 package br.com.projetofcamara.projeto.controller.form;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 import br.com.projetofcamara.projeto.entity.Categoria;
 
 public class AtualizaCategoriaForm {
 
-	@NotNull @NotEmpty
+	@NotBlank
 	private String id;
-	@NotNull @NotEmpty
+	@NotBlank
 	private String nome;
 	private String descricao;
 	private boolean ativo;

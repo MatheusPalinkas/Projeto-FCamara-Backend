@@ -3,6 +3,16 @@ package br.com.projetofcamara.projeto.controller.form;
 import br.com.projetofcamara.projeto.entity.Vendedor;
 
 public class VendedorForm extends UsuarioForm{
+	
+	private String codigoComercio;
+	
+	public String getCodigoComercio() {
+		return codigoComercio;
+	}
+
+	public void setCodigoComercio(String codigoComercio) {
+		this.codigoComercio = codigoComercio;
+	}	
 		
 	public Vendedor converter() {
 		

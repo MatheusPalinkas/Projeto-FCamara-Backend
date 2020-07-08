@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import br.com.projetofcamara.projeto.entity.Categoria;
+import br.com.projetofcamara.projeto.exception.RegraDeNegocioException;
 import br.com.projetofcamara.projeto.repository.CategoriaRepository;
 import br.com.projetofcamara.projeto.service.CategoriaService;
 
@@ -27,6 +28,8 @@ public class CategoriaServiceImpl implements CategoriaService {
 			categoriaBanco.get().setDescricao(categoria.getDescricao());
 			categoriaBanco.get().setNome(categoria.getNome());	
 			categoriaBanco.get().setAtivo(categoria.isAtivo());
+		}else {
+			throw new RegraDeNegocioException("Categoria inexistente");
 		}
 		return Optional.ofNullable(categoriaRepository.save(categoriaBanco.get()));
 	}

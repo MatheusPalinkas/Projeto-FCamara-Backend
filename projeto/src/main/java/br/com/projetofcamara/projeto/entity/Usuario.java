@@ -28,8 +28,7 @@ public abstract class Usuario implements UserDetails{
 	protected String telefone;
 	protected TipoUsuario tipoUsuario;
 	protected String urlFoto;
-	protected String codigoComercio;
-	
+		
 	public TipoUsuario getTipoUsuario() {
 		return tipoUsuario;
 	}
@@ -101,13 +100,6 @@ public abstract class Usuario implements UserDetails{
 		this.urlFoto = urlFoto;
 	}
 	
-	public String getCodigoComercio() {
-		return codigoComercio;
-	}
-	
-	public void setCodigoComercio(String codigoComercio) {
-		this.codigoComercio = codigoComercio;
-	}
 	
 	@Override
 	public String getPassword() {

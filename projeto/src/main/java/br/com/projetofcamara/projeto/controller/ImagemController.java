@@ -1,23 +1,23 @@
 package br.com.projetofcamara.projeto.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import javax.validation.Valid;
+import org.bson.BsonBinarySubType;
+import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import br.com.projetofcamara.projeto.controller.dto.ImagemDto;
-import br.com.projetofcamara.projeto.controller.form.ImagemForm;
 import br.com.projetofcamara.projeto.entity.Imagem;
-import br.com.projetofcamara.projeto.enums.TipoDetentor;
 import br.com.projetofcamara.projeto.service.ImagemService;
 
 @RestController
@@ -37,29 +37,13 @@ public class ImagemController {
 		
 		return ResponseEntity.notFound().build();
 	}
-		
-	@GetMapping(value = "{tipoDetentor}/{id}")
-	public ResponseEntity<List<ImagemDto>> buscarImagens(@PathVariable String tipoDetentor, @PathVariable String id) {
-		Optional<List<Imagem>> imagemBanco = imagemService.buscarImagensDeUmDetentor(TipoDetentor.getEnumFromText(tipoDetentor), id);
-	
-		if(imagemBanco.isPresent()) {
-			List<ImagemDto> listDto = new ArrayList<ImagemDto>();
-			for (Imagem imagem : imagemBanco.get()) {
-				listDto.add(new ImagemDto(imagem));
-			}
 			
-			return new ResponseEntity<List<ImagemDto>>( listDto, HttpStatus.OK );
-		}
-	
-		return ResponseEntity.notFound().build();
-	}
-	
-	@PostMapping("/{tipoDetentor}")
-	public ResponseEntity<ImagemDto> adicionarImagem(@PathVariable String tipoDetentor, @Valid ImagemForm imagemForm) throws IOException{
+	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public ResponseEntity<ImagemDto> adicionarImagem(@RequestParam("binario") MultipartFile binario) throws IOException{
 		
-		Imagem imagemEntity = imagemForm.converter();
-		imagemEntity.setDetentor(TipoDetentor.getEnumFromText(tipoDetentor));
-		Optional<Imagem> imagemBd = imagemService.uploadImagem(imagemEntity);
+		Imagem imagem = new Imagem();
+		imagem.setBinario( new Binary(BsonBinarySubType.BINARY, binario.getBytes()) );				
+		Optional<Imagem> imagemBd = imagemService.uploadImagem(imagem);
 		
 		if(imagemBd.isPresent()) {
 			return new ResponseEntity<>( new ImagemDto(imagemBd.get()), HttpStatus.CREATED);

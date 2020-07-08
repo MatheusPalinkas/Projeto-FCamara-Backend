@@ -5,9 +5,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
+import br.com.projetofcamara.projeto.entity.Cliente;
 import br.com.projetofcamara.projeto.entity.Endereco;
 import br.com.projetofcamara.projeto.enums.TipoDetentor;
+import br.com.projetofcamara.projeto.exception.RegraDeNegocioException;
 import br.com.projetofcamara.projeto.repository.EnderecoRepository;
+import br.com.projetofcamara.projeto.service.ClienteService;
 import br.com.projetofcamara.projeto.service.EnderecoService;
 
 @Service
@@ -15,13 +18,27 @@ public class EnderecoServiceImpl implements EnderecoService{
 	
 	@Autowired
 	EnderecoRepository enderecoRepository;
-
+	
+	@Autowired
+	ClienteService clienteService;
+		
 	@Override
 	public Optional<Endereco> criarEndereco(Endereco endereco) {
-		if(!TipoDetentor.PRODUTO.equals(endereco.getDetentor())){
-			return Optional.ofNullable(enderecoRepository.save(endereco));
+		
+		Optional<Cliente> clienteBd = clienteService.buscarClientePeloId(endereco.getCodigoDetentor());
+		
+		if(!clienteBd.isPresent() &&  TipoDetentor.CLIENTE.equals(endereco.getDetentor())) {
+			throw new RegraDeNegocioException("Cliente inexistente");
 		}
-		return Optional.empty();
+		
+		if(TipoDetentor.PRODUTO.equals(endereco.getDetentor()) ){
+			throw new RegraDeNegocioException("Produto não possui endereço");
+		}
+		
+		if(TipoDetentor.VENDEDOR.equals(endereco.getDetentor()) ){
+			throw new RegraDeNegocioException("Vendedor não possui endereço");
+		}
+		return Optional.ofNullable(enderecoRepository.save(endereco));
 	}
 
 	@Override
@@ -37,8 +54,9 @@ public class EnderecoServiceImpl implements EnderecoService{
 			enderecoBanco.get().setLogradouro(endereco.getLogradouro());
 			enderecoBanco.get().setNumero(endereco.getNumero());
 			enderecoBanco.get().setUf(endereco.getUf());			
-		}
-		
+		}else {
+			throw new RegraDeNegocioException("Endereco inexistente");
+		}		
 		return Optional.ofNullable(enderecoRepository.save(enderecoBanco.get()));
 	}
 

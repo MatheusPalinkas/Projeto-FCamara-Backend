@@ -8,6 +8,8 @@ public class EnderecoForm {
 	
 	@NotNull @NotEmpty 
 	private String cep;	
+	@NotNull @NotEmpty	
+	private String nome;
 	@NotNull @NotEmpty 
 	private String cidade;
 	@NotNull @NotEmpty 
@@ -18,8 +20,8 @@ public class EnderecoForm {
 	private String bairro;
 	@NotNull @NotEmpty 
 	private String uf;
-	@NotNull @NotEmpty 
 	private String complemento;
+	private String codigoDetentor;
 		
 	public String getCep() {
 		return cep;
@@ -62,7 +64,19 @@ public class EnderecoForm {
 	}	
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
+	}		
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
 	}	
+	public String getCodigoDetentor() {
+		return codigoDetentor;
+	}
+	public void setCodigoDetentor(String codigoDetentor) {
+		this.codigoDetentor = codigoDetentor;
+	}
 	
 	public Endereco converter() {
 		
@@ -74,6 +88,8 @@ public class EnderecoForm {
 		endereco.setUf(uf);
 		endereco.setBairro(bairro);
 		endereco.setCep(cep);
+		endereco.setNome(nome);
+		endereco.setCodigoDetentor(codigoDetentor);
 				
 		return endereco;
 	}	

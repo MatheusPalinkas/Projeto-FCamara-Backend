@@ -1,16 +1,21 @@
 package br.com.projetofcamara.projeto.service.impl;
 
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 import br.com.projetofcamara.projeto.entity.Avaliacao;
 import br.com.projetofcamara.projeto.entity.Categoria;
 import br.com.projetofcamara.projeto.entity.Comercio;
+import br.com.projetofcamara.projeto.entity.Endereco;
 import br.com.projetofcamara.projeto.exception.RegraDeNegocioException;
 import br.com.projetofcamara.projeto.repository.ComercioRepository;
+import br.com.projetofcamara.projeto.service.CategoriaService;
 import br.com.projetofcamara.projeto.service.ComercioService;
+import br.com.projetofcamara.projeto.service.EnderecoService;
 import br.com.projetofcamara.projeto.service.PedidoService;
 
 @Service
@@ -21,9 +26,26 @@ public class ComercioServiceImpl implements ComercioService{
 	
 	@Autowired
 	PedidoService pedidoService;
+	
+	@Autowired
+	CategoriaService categoriaService;
+	
+	@Autowired
+	EnderecoService enderecoService;
 
 	@Override
 	public Optional<Comercio> criarComercio(Comercio comercio) {
+		
+		Optional<Categoria> categoriaBd = categoriaService.buscarCategoriaPeloId(comercio.getCategoria().getId());
+		Optional<Endereco> enderecoBd = enderecoService.buscarEnderecoPeloId(comercio.getEndereco().getId());
+		
+		if(!categoriaBd.isPresent()) {
+			throw new RegraDeNegocioException("Categoria inexistente");
+		}
+		
+		if(!enderecoBd.isPresent()) {
+			throw new RegraDeNegocioException("Endereco inexistente");
+		}
 		return Optional.ofNullable(comercioRespository.save(comercio));
 	}
 
@@ -41,7 +63,7 @@ public class ComercioServiceImpl implements ComercioService{
 			comercioBanco.get().setTempoEntrega(comercio.getTempoEntrega());
 			comercioBanco.get().setUrlFoto(comercio.getUrlFoto());
 			comercioBanco.get().setValorEntrega(comercio.getValorEntrega());
-			comercioBanco.get().setMediaAvaliacoes(comercio.getMediaAvaliacoes());
+			
 		}else {
 			throw new RegraDeNegocioException("Comercio não existe");
 		}
@@ -82,7 +104,7 @@ public class ComercioServiceImpl implements ComercioService{
 			
 			if(comercioAvaliado.get().getMediaAvaliacoes() != mediaAvaliacoesAtualizada) {
 				comercioAvaliado.get().setMediaAvaliacoes(mediaAvaliacoesAtualizada);
-				this.alterarComercio(comercioAvaliado.get());
+				comercioRespository.save(comercioAvaliado.get());
 			}
 		}
 		

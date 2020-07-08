@@ -30,8 +30,7 @@ public class Comercio {
 	private double mediaAvaliacoes;
 	
 	public Comercio() {
-		this.possuiServicoEntrega = true;
-		this.localAtendimento = false;
+		this.possuiServicoEntrega = true;		
 		this.dataCriacao = LocalDate.now();
 	}
 	

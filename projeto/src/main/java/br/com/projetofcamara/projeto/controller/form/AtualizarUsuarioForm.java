@@ -1,15 +1,14 @@
 package br.com.projetofcamara.projeto.controller.form;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 public class AtualizarUsuarioForm {
 
-	@NotNull @NotEmpty 
+	@NotBlank
 	protected String id;
-	@NotNull @NotEmpty 
+	@NotBlank
 	protected String nome;
-	@NotNull @NotEmpty 
+	@NotBlank
 	protected String telefone;
 	protected String senha;
 	

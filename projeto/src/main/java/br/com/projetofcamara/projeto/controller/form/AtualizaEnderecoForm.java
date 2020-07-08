@@ -1,27 +1,24 @@
 package br.com.projetofcamara.projeto.controller.form;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
+import javax.validation.constraints.NotBlank;
 import br.com.projetofcamara.projeto.entity.Endereco;
 
 public class AtualizaEnderecoForm {
 
-	@NotNull @NotEmpty
+	@NotBlank
 	private String id;
-	@NotNull @NotEmpty
+	@NotBlank
 	private String cep;	
-	@NotNull @NotEmpty
+	@NotBlank
 	private String cidade;
-	@NotNull @NotEmpty
+	@NotBlank
 	private String logradouro;
-	@NotNull @NotEmpty
+	@NotBlank
 	private String numero;
-	@NotNull @NotEmpty
+	@NotBlank
 	private String bairro;
-	@NotNull @NotEmpty
+	@NotBlank
 	private String uf;
-	@NotNull @NotEmpty
 	private String complemento;	
 	
 	public String getId() {

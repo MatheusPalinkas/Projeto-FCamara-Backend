@@ -3,7 +3,7 @@ package br.com.projetofcamara.projeto.controller.form;
 import br.com.projetofcamara.projeto.entity.Cliente;
 
 public class ClienteForm extends UsuarioForm{
-
+	
 	public Cliente converter() {
 		
 		Cliente cliente = new Cliente();

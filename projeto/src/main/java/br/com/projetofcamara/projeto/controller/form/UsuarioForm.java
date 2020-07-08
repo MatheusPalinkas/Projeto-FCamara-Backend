@@ -23,9 +23,7 @@ public class UsuarioForm {
 	@NotNull @NotEmpty 
 	protected String telefone;
 	protected String urlFoto;
-	protected String codigoComercio;
-	
-		
+			
 	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
@@ -82,11 +80,4 @@ public class UsuarioForm {
 		this.urlFoto = urlFoto;
 	}
 
-	public String getCodigoComercio() {
-		return codigoComercio;
-	}
-
-	public void setCodigoComercio(String codigoComercio) {
-		this.codigoComercio = codigoComercio;
-	}
 }

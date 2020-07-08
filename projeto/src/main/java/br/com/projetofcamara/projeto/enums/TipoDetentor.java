@@ -6,7 +6,8 @@ public enum TipoDetentor {
 
 	COMERCIO,
 	CLIENTE,
-	PRODUTO;
+	PRODUTO,
+	VENDEDOR;
 	
 	public static TipoDetentor getEnumFromText(String texto) {
 		if(StringUtils.isEmpty(texto)) {
