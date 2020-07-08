@@ -22,9 +22,9 @@ public class ProdutoForm {
 	@NotNull @NotEmpty
 	private String codigoCategoria;	
 	@NotNull 
-	private boolean produtoPorDemanda;
+	private boolean produtoDemanda;
 	@NotNull	
-	private boolean produtoComEstoque;
+	private boolean produtoEstoque;
 		
 	public String getNome() {
 		return nome;
@@ -68,17 +68,17 @@ public class ProdutoForm {
 	public void setCodigoCategoria(String codigoCategoria) {
 		this.codigoCategoria = codigoCategoria;
 	}
-	public boolean isProdutoPorDemanda() {
-		return produtoPorDemanda;
+	public boolean isProdutoDemanda() {
+		return produtoDemanda;
 	}
-	public void setProdutoPorDemanda(boolean produtoPorDemanda) {
-		this.produtoPorDemanda = produtoPorDemanda;
+	public void setProdutoDemanda(boolean produtoDemanda) {
+		this.produtoDemanda = produtoDemanda;
 	}	
-	public boolean isProdutoComEstoque() {
-		return produtoComEstoque;
+	public boolean isProdutoEstoque() {
+		return produtoEstoque;
 	}
-	public void setProdutoComEstoque(boolean produtoComEstoque) {
-		this.produtoComEstoque = produtoComEstoque;
+	public void setProdutoComEstoque(boolean produtoEstoque) {
+		this.produtoEstoque = produtoEstoque;
 	}
 	
 	public Produto converter() {
@@ -90,8 +90,8 @@ public class ProdutoForm {
 		produto.setUrlFoto(urlFoto);		
 		produto.setComercio(new Comercio(codigoComercio));
 		produto.setCategoria( new Categoria(codigoCategoria));
-		produto.setProdutoPorDemanda(produtoPorDemanda);
-		produto.setProdutoComEstoque(produtoComEstoque);
+		produto.setProdutoDemanda(produtoDemanda);
+		produto.setProdutoEstoque(produtoEstoque);
 		
 		return produto;
 	}	

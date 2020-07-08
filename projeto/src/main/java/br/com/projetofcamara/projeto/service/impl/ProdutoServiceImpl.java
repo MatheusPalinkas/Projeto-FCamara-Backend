@@ -39,6 +39,10 @@ public class ProdutoServiceImpl implements ProdutoService{
 		if(!categoriaBd.isPresent()) {
 			throw new RegraDeNegocioException("Categoria inexistente");
 		}
+		
+		if(!produto.isProdutoDemanda() && !produto.isProdutoEstoque()) {
+			throw new RegraDeNegocioException("É necessario selecionar uma das opções: Estoque ou Encomenda");
+		}
 		return Optional.ofNullable(produtoRepository.save(produto));
 	}
 
@@ -99,7 +103,7 @@ public class ProdutoServiceImpl implements ProdutoService{
 		Optional<Produto> produtoBanco = produtoRepository.findById(produto.getId());
 		if(produtoBanco.isPresent()) {			
 			produtoBanco.get().setQuantidade(produto.getQuantidade());
-			produtoBanco.get().setProdutoEmEstoque(produto.isProdutoEmEstoque());			
+			produtoBanco.get().setProdutoDisponivel(produto.isProdutoDisponivel());			
 		}else {
 			throw new RegraDeNegocioException("Produto não existe");
 		}

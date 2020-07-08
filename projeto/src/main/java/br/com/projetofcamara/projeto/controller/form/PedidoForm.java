@@ -12,8 +12,7 @@ import br.com.projetofcamara.projeto.entity.ItemPedido;
 import br.com.projetofcamara.projeto.entity.Pedido;
 
 public class PedidoForm {
-
-	@NotNull @NotEmpty
+	
 	private String observacao;	
 	@NotNull 
 	private List<ItemPedido> itensPedido;

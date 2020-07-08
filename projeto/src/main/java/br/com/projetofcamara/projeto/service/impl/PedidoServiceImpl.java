@@ -68,12 +68,12 @@ public class PedidoServiceImpl implements PedidoService{
 					throw new RegraDeNegocioException("Produto " + produtoBd.getNome() + " de comercio diferente");					
 				}						
 				
-				if(produtoBd.isProdutoPorDemanda()) {
-					calculaSubtotalPedido(pedido, itemPedido, produtoBd);
+				if(produtoBd.isProdutoDemanda() && !produtoBd.isProdutoDisponivel()) {					
+					calculaSubtotalPedido(pedido, itemPedido, produtoBd);										
 				}
 				
-				if(produtoBd.isProdutoComEstoque()) {
-					if(produtoBd.getQuantidade() - itemPedido.getQuantidade() < 0 || !produtoBd.isProdutoEmEstoque()) {
+				if(produtoBd.isProdutoEstoque()) {
+					if(produtoBd.getQuantidade() - itemPedido.getQuantidade() < 0 || !produtoBd.isProdutoDisponivel()) {
 						throw new RegraDeNegocioException("Produto sem estoque ou não possui a quantidade desejada");
 					}
 					calculaSubtotalPedido(pedido, itemPedido, produtoBd);

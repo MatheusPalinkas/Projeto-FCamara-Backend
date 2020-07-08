@@ -13,9 +13,9 @@ public class ProdutoDto {
 	private String descricao;
 	private LocalDateTime dataCriacao;
 	private String urlFoto;
-	private boolean produtoPorDemanda;
-	private boolean produtoComEstoque;
-	private boolean produtoEmEstoque;
+	private boolean produtoDemanda;
+	private boolean produtoEstoque;
+	private boolean produtoDisponivel;
 	private CodigoNomeDto comercio;
 	private CodigoNomeDto categoria;
 	
@@ -27,9 +27,9 @@ public class ProdutoDto {
 		this.descricao = produto.getDescricao();
 		this.dataCriacao = produto.getDataCriacao();
 		this.urlFoto = produto.getUrlFoto();
-		this.produtoEmEstoque = produto.isProdutoEmEstoque();
-		this.produtoPorDemanda = produto.isProdutoPorDemanda();
-		this.produtoComEstoque = produto.isProdutoComEstoque();
+		this.produtoEstoque = produto.isProdutoEstoque();
+		this.produtoDemanda = produto.isProdutoDemanda();
+		this.produtoDisponivel = produto.isProdutoDisponivel();
 		if(produto.getCategoria() != null)
 			this.categoria = new CodigoNomeDto(produto.getCategoria().getId(), produto.getCategoria().getNome());
 		
@@ -65,8 +65,8 @@ public class ProdutoDto {
 		return urlFoto;
 	}
 	
-	public boolean isProdutoEmEstoque() {
-		return produtoEmEstoque;
+	public boolean isProdutoDisponivel() {
+		return produtoDisponivel;
 	}
 
 	public CodigoNomeDto getComercio() {
@@ -77,12 +77,12 @@ public class ProdutoDto {
 		return categoria;
 	}
 	
-	public boolean isProdutoPorDemanda() {
-		return produtoPorDemanda;
+	public boolean isProdutoDemanda() {
+		return produtoDemanda;
 	}
 	
-	public boolean isProdutoComEstoque() {
-		return produtoComEstoque;
+	public boolean isProdutoEstoque() {
+		return produtoEstoque;
 	}	
 	
 	public static Page<ProdutoDto> converter(Page<Produto> produto) {

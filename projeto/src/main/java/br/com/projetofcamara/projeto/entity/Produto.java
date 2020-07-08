@@ -16,16 +16,16 @@ public class Produto {
 	private String descricao;
 	private LocalDateTime dataCriacao;
 	private String urlFoto;
-	private boolean produtoPorDemanda;
-	private boolean produtoComEstoque;
-	private boolean produtoEmEstoque;
+	private boolean produtoDemanda;
+	private boolean produtoEstoque;
+	private boolean produtoDisponivel;
 	@DBRef
 	private Comercio comercio;	
 	@DBRef
 	private Categoria categoria;
 	
 	public Produto() {
-		this.produtoEmEstoque = true;
+		this.produtoDisponivel = true;
 		this.dataCriacao = LocalDateTime.now();
 	}	
 	
@@ -85,12 +85,12 @@ public class Produto {
 		this.quantidade = quantidade;
 	}
 
-	public boolean isProdutoEmEstoque() {
-		return produtoEmEstoque;
+	public boolean isProdutoDisponivel() {
+		return produtoDisponivel;
 	}
 
-	public void setProdutoEmEstoque(boolean produtoEmEstoque) {
-		this.produtoEmEstoque = produtoEmEstoque;
+	public void setProdutoDisponivel(boolean produtoDisponivel) {
+		this.produtoDisponivel = produtoDisponivel;
 	}
 
 	public Comercio getComercio() {
@@ -109,20 +109,20 @@ public class Produto {
 		this.categoria = categoria;
 	}
 
-	public boolean isProdutoPorDemanda() {
-		return produtoPorDemanda;
+	public boolean isProdutoDemanda() {
+		return produtoDemanda;
 	}
 
-	public void setProdutoPorDemanda(boolean produtoPorDemanda) {
-		this.produtoPorDemanda = produtoPorDemanda;
+	public void setProdutoDemanda(boolean produtoDemanda) {
+		this.produtoDemanda = produtoDemanda;
 	}
 
-	public boolean isProdutoComEstoque() {
-		return produtoComEstoque;
+	public boolean isProdutoEstoque() {
+		return produtoEstoque;
 	}
 
-	public void setProdutoComEstoque(boolean produtoComEstoque) {
-		this.produtoComEstoque = produtoComEstoque;
+	public void setProdutoEstoque(boolean produtoEstoque) {
+		this.produtoEstoque = produtoEstoque;
 	}
 	
 }

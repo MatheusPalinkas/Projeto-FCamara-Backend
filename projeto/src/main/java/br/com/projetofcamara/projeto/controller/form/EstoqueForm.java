@@ -11,7 +11,7 @@ public class EstoqueForm {
 	@NotNull
 	private int quantidade;
 	@NotNull
-	private boolean produtoEmEstoque;
+	private boolean produtoDisponivel;
 	
 	public String getId() {
 		return id;
@@ -26,16 +26,16 @@ public class EstoqueForm {
 		this.quantidade = quantidade;
 	}
 	public boolean isProdutoEmEstoque() {
-		return produtoEmEstoque;
+		return produtoDisponivel;
 	}
-	public void setProdutoEmEstoque(boolean produtoEmEstoque) {
-		this.produtoEmEstoque = produtoEmEstoque;
+	public void setProdutoDisponivel(boolean produtoDisponivel) {
+		this.produtoDisponivel = produtoDisponivel;
 	}
 	public Produto converter() {
 		Produto produto = new Produto();
 		produto.setId(id);
 		produto.setQuantidade(quantidade);
-		produto.setProdutoEmEstoque(produtoEmEstoque);
+		produto.setProdutoDisponivel(produtoDisponivel);
 		
 		return produto;
 	}	
