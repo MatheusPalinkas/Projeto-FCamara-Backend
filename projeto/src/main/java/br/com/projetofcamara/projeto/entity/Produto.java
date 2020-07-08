@@ -16,9 +16,11 @@ public class Produto {
 	private String descricao;
 	private LocalDateTime dataCriacao;
 	private String urlFoto;
+	private boolean produtoPorDemanda;
+	private boolean produtoComEstoque;
 	private boolean produtoEmEstoque;
 	@DBRef
-	private Comercio comercio;
+	private Comercio comercio;	
 	@DBRef
 	private Categoria categoria;
 	
@@ -30,36 +32,47 @@ public class Produto {
 	public String getId() {
 		return id;
 	}
+	
 	public void setId(String id) {
 		this.id = id;
 	}
+	
 	public String getNome() {
 		return nome;
 	}
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
 	public double getPreco() {
 		return preco;
 	}
+	
 	public void setPreco(double preco) {
 		this.preco = preco;
 	}
+	
 	public String getDescricao() {
 		return descricao;
 	}
+		
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
 	public String getUrlFoto() {
 		return urlFoto;
 	}
+	
 	public void setUrlFoto(String urlFoto) {
 		this.urlFoto = urlFoto;
 	}	
+	
 	public LocalDateTime getDataCriacao() {
 		return dataCriacao;
 	}
+	
 	public void setDataCriacao(LocalDateTime dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
@@ -83,7 +96,7 @@ public class Produto {
 	public Comercio getComercio() {
 		return comercio;
 	}
-
+	
 	public void setComercio(Comercio comercio) {
 		this.comercio = comercio;
 	}
@@ -96,5 +109,20 @@ public class Produto {
 		this.categoria = categoria;
 	}
 
-		
+	public boolean isProdutoPorDemanda() {
+		return produtoPorDemanda;
+	}
+
+	public void setProdutoPorDemanda(boolean produtoPorDemanda) {
+		this.produtoPorDemanda = produtoPorDemanda;
+	}
+
+	public boolean isProdutoComEstoque() {
+		return produtoComEstoque;
+	}
+
+	public void setProdutoComEstoque(boolean produtoComEstoque) {
+		this.produtoComEstoque = produtoComEstoque;
+	}
+	
 }

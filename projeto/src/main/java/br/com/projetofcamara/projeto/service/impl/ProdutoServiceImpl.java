@@ -5,10 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import br.com.projetofcamara.projeto.entity.Categoria;
 import br.com.projetofcamara.projeto.entity.Comercio;
 import br.com.projetofcamara.projeto.entity.Produto;
 import br.com.projetofcamara.projeto.exception.RegraDeNegocioException;
 import br.com.projetofcamara.projeto.repository.ProdutoRepository;
+import br.com.projetofcamara.projeto.service.CategoriaService;
+import br.com.projetofcamara.projeto.service.ComercioService;
 import br.com.projetofcamara.projeto.service.ProdutoService;
 
 @Service
@@ -16,9 +19,26 @@ public class ProdutoServiceImpl implements ProdutoService{
 	
 	@Autowired
 	ProdutoRepository produtoRepository;
+	
+	@Autowired
+	ComercioService comercioService;
+	
+	@Autowired
+	CategoriaService categoriaService;
 
 	@Override
 	public Optional<Produto> criarProduto(Produto produto) {
+		
+		Optional<Comercio> comercioBd = comercioService.buscarComercioPeloId(produto.getComercio().getId());
+		Optional<Categoria> categoriaBd = categoriaService.buscarCategoriaPeloId(produto.getCategoria().getId());
+		
+		if(!comercioBd.isPresent()) {
+			throw new RegraDeNegocioException("Comercio inexistente");
+		}
+		
+		if(!categoriaBd.isPresent()) {
+			throw new RegraDeNegocioException("Categoria inexistente");
+		}
 		return Optional.ofNullable(produtoRepository.save(produto));
 	}
 
@@ -44,8 +64,18 @@ public class ProdutoServiceImpl implements ProdutoService{
 	}
 
 	@Override
-	public Page<Produto> listarProdutosDeUmComercio(String idComercio, Pageable paginacao) {
-		return produtoRepository.findByComercio(new Comercio(idComercio), paginacao);
+	public Page<Produto> listarProdutosDeUmComercio(String idComercio, Pageable paginacao) {		
+		return produtoRepository.findByComercio(idComercio, paginacao);
+	}
+	
+	@Override
+	public Page<Produto> listarProdutosComercioPorNome(String idComercio, String nome, Pageable paginacao) {			
+		return produtoRepository.findByComercioNomeIgnoreCaseLike(idComercio, nome, paginacao);
+	}
+	
+	@Override
+	public Page<Produto> listarProdutosComercioPorCategoria(String idComercio, String idCategoria, Pageable paginacao) {		
+		return produtoRepository.findByComercioCategoria( idComercio, idCategoria, paginacao);
 	}
 	
 	@Override
@@ -54,14 +84,13 @@ public class ProdutoServiceImpl implements ProdutoService{
 	}
 
 	@Override
-	public Page<Produto> listarPorNome(String nome, Pageable paginacao) {
+	public Page<Produto> listarProdutoPorNome(String nome, Pageable paginacao) {
 		return produtoRepository.findByNomeIgnoreCaseLike(nome, paginacao);
 	}
-
+		
 	@Override
 	public void excluirProduto(String id) {
-		this.produtoRepository.deleteById(id);
-		
+		this.produtoRepository.deleteById(id);		
 	}
 
 	@Override
@@ -76,6 +105,7 @@ public class ProdutoServiceImpl implements ProdutoService{
 		}
 		return Optional.ofNullable(produtoRepository.save(produtoBanco.get()));
 	}
+	
 }
 
 	

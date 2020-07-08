@@ -14,12 +14,17 @@ public interface ProdutoService {
 	Optional<Produto> alterarEstoqueProduto(Produto produto);
 
 	Optional<Produto> buscarProdutoPeloId(String id);	
-	
-	Page<Produto> listarProdutosDeUmComercio(String idComercio, Pageable paginacao);
-	
+		
 	Page<Produto> listarProdutos(Pageable paginacao);
 	
-	Page<Produto> listarPorNome(String nome, Pageable paginacao);
+	Page<Produto> listarProdutoPorNome(String nome, Pageable paginacao);
 	
 	void excluirProduto(String id);	
+
+	Page<Produto> listarProdutosDeUmComercio(String idComercio, Pageable paginacao);
+
+	Page<Produto> listarProdutosComercioPorNome(String idComercio, String nome, Pageable paginacao);
+
+	Page<Produto> listarProdutosComercioPorCategoria(String idComercio, String idCategoria, Pageable paginacao);
+
 }

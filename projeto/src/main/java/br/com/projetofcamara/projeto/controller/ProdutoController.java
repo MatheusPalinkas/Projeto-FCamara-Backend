@@ -37,9 +37,22 @@ public class ProdutoController {
 	
 	
 	@GetMapping("comercio/{idComercio}")
-	public Page<ProdutoDto> listaProdutoDeUmComercio(@PathVariable String idComercio, Pageable paginacao) {
+	public Page<ProdutoDto> listaProdutoDeUmComercio(@PathVariable String idComercio,
+							@RequestParam(required = false) String nome,
+							@RequestParam(required = false) String idCategoria, Pageable paginacao) {
 		
-		Page<Produto> produto = produtoService.listarProdutosDeUmComercio(idComercio, paginacao);
+		Page<Produto> produto;
+			
+		if(nome != null) {
+			produto = produtoService.listarProdutosComercioPorNome(idComercio, nome, paginacao);
+			return ProdutoDto.converter(produto);
+		}
+		if(idCategoria != null) {
+			produto = produtoService.listarProdutosComercioPorCategoria(idComercio, idCategoria, paginacao);
+		}else {
+			produto = produtoService.listarProdutosDeUmComercio(idComercio, paginacao);
+		}
+		
 		return ProdutoDto.converter(produto);
 	}
 	
@@ -50,7 +63,7 @@ public class ProdutoController {
 		if(nome == null) {
 			produto = produtoService.listarProdutos(paginacao);			
 		}else {
-			produto = produtoService.listarPorNome(nome, paginacao);
+			produto = produtoService.listarProdutoPorNome(nome, paginacao);
 		}
 		
 		return ProdutoDto.converter(produto); 		

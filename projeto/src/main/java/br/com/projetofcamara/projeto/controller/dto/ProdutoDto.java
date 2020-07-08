@@ -13,6 +13,8 @@ public class ProdutoDto {
 	private String descricao;
 	private LocalDateTime dataCriacao;
 	private String urlFoto;
+	private boolean produtoPorDemanda;
+	private boolean produtoComEstoque;
 	private boolean produtoEmEstoque;
 	private CodigoNomeDto comercio;
 	private CodigoNomeDto categoria;
@@ -26,8 +28,13 @@ public class ProdutoDto {
 		this.dataCriacao = produto.getDataCriacao();
 		this.urlFoto = produto.getUrlFoto();
 		this.produtoEmEstoque = produto.isProdutoEmEstoque();
-		this.comercio = new CodigoNomeDto(produto.getComercio().getId(), produto.getComercio().getNome());
-		this.categoria = new CodigoNomeDto(produto.getCategoria().getId(), produto.getCategoria().getNome());
+		this.produtoPorDemanda = produto.isProdutoPorDemanda();
+		this.produtoComEstoque = produto.isProdutoComEstoque();
+		if(produto.getCategoria() != null)
+			this.categoria = new CodigoNomeDto(produto.getCategoria().getId(), produto.getCategoria().getNome());
+		
+		if(produto.getComercio() != null)
+			this.comercio = new CodigoNomeDto(produto.getComercio().getId(), produto.getComercio().getNome());		
 	}
 
 	public String getId() {
@@ -70,8 +77,15 @@ public class ProdutoDto {
 		return categoria;
 	}
 	
-	public static Page<ProdutoDto> converter(Page<Produto> produto) {
-		return produto.map(ProdutoDto::new);
+	public boolean isProdutoPorDemanda() {
+		return produtoPorDemanda;
 	}
 	
+	public boolean isProdutoComEstoque() {
+		return produtoComEstoque;
+	}	
+	
+	public static Page<ProdutoDto> converter(Page<Produto> produto) {
+		return produto.map(ProdutoDto::new);
+	}	
 }

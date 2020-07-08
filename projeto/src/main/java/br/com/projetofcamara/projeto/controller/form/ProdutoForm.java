@@ -21,7 +21,11 @@ public class ProdutoForm {
 	private String codigoComercio;
 	@NotNull @NotEmpty
 	private String codigoCategoria;	
-	
+	@NotNull 
+	private boolean produtoPorDemanda;
+	@NotNull	
+	private boolean produtoComEstoque;
+		
 	public String getNome() {
 		return nome;
 	}
@@ -64,6 +68,18 @@ public class ProdutoForm {
 	public void setCodigoCategoria(String codigoCategoria) {
 		this.codigoCategoria = codigoCategoria;
 	}
+	public boolean isProdutoPorDemanda() {
+		return produtoPorDemanda;
+	}
+	public void setProdutoPorDemanda(boolean produtoPorDemanda) {
+		this.produtoPorDemanda = produtoPorDemanda;
+	}	
+	public boolean isProdutoComEstoque() {
+		return produtoComEstoque;
+	}
+	public void setProdutoComEstoque(boolean produtoComEstoque) {
+		this.produtoComEstoque = produtoComEstoque;
+	}
 	
 	public Produto converter() {
 		Produto produto = new Produto();
@@ -74,6 +90,8 @@ public class ProdutoForm {
 		produto.setUrlFoto(urlFoto);		
 		produto.setComercio(new Comercio(codigoComercio));
 		produto.setCategoria( new Categoria(codigoCategoria));
+		produto.setProdutoPorDemanda(produtoPorDemanda);
+		produto.setProdutoComEstoque(produtoComEstoque);
 		
 		return produto;
 	}	
