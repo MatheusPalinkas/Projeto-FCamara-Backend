@@ -66,16 +66,19 @@ public class PedidoServiceImpl implements PedidoService{
 				
 				if(!produtoBd.getComercio().getId().equals(comercioBd.get().getId())) {
 					throw new RegraDeNegocioException("Produto " + produtoBd.getNome() + " de comercio diferente");					
-				}	
+				}						
 				
-				if(produtoBd.getQuantidade() - itemPedido.getQuantidade() < 0 || !produtoBd.isProdutoEmEstoque()) {
-					throw new RegraDeNegocioException("Produto sem estoque ou não possui a quantidade desejada");
-				}	
+				if(produtoBd.isProdutoPorDemanda()) {
+					calculaSubtotalPedido(pedido, itemPedido, produtoBd);
+				}
 				
-				itemPedido.setValorProduto(produtoBd.getPreco());
-				pedido.setSubtotal( pedido.getSubtotal() + itemPedido.getValorProduto() * itemPedido.getQuantidade() );
-				
-				subtraiQuantidadeProdutoEstoque(itemPedido, produtoBd);
+				if(produtoBd.isProdutoComEstoque()) {
+					if(produtoBd.getQuantidade() - itemPedido.getQuantidade() < 0 || !produtoBd.isProdutoEmEstoque()) {
+						throw new RegraDeNegocioException("Produto sem estoque ou não possui a quantidade desejada");
+					}
+					calculaSubtotalPedido(pedido, itemPedido, produtoBd);
+					subtraiQuantidadeProdutoEstoque(itemPedido, produtoBd);
+				}
 			}		
 		}
 		
@@ -83,6 +86,11 @@ public class PedidoServiceImpl implements PedidoService{
 		pedido.setTotal(pedido.getSubtotal() + comercioBd.get().getValorEntrega());
 		
 		return Optional.ofNullable(pedidoRepository.save(pedido));			
+	}
+
+	private void calculaSubtotalPedido(Pedido pedido, ItemPedido itemPedido, Produto produtoBd) {
+		itemPedido.setValorProduto(produtoBd.getPreco());
+		pedido.setSubtotal( pedido.getSubtotal() + itemPedido.getValorProduto() * itemPedido.getQuantidade() );		
 	}
 
 	private void subtraiQuantidadeProdutoEstoque(ItemPedido itemPedido, Produto produto) {
