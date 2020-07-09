@@ -19,6 +19,10 @@ public class ProdutoDto {
 	private CodigoNomeDto comercio;
 	private CodigoNomeDto categoria;
 	
+	public ProdutoDto() {
+		
+	}
+	
 	public ProdutoDto(Produto produto) {
 		this.id = produto.getId();
 		this.nome = produto.getNome();

@@ -47,21 +47,24 @@ public class PedidoServiceImpl implements PedidoService{
 			throw new RegraDeNegocioException("Carrinho vazio!");
 		}
 		
-		Optional<Comercio> comercioBd = comercioService.buscarComercioPeloId(pedido.getComercio().getId());
-		if(!comercioBd.isPresent()) {
-			throw new RegraDeNegocioException("Comercio não existe");
-		}
+		Optional<Comercio> comercioBd = Optional.empty();
 		
 		Optional<Endereco> enderecoBd = enderecoService.buscarEnderecoPeloId(pedido.getEndereco().getId());
 		Optional<Cliente> clienteBd = clienteService.buscarClientePeloId(pedido.getCliente().getId());		
 		if(enderecoBd.isPresent() && clienteBd.isPresent() && !clienteBd.get().getId().equals(enderecoBd.get().getCodigoDetentor())) {
 			throw new RegraDeNegocioException("Endereço não pertence ao cliente");
 		}		
-		
+		int i = 0;
 		for (ItemPedido itemPedido : pedido.getItensPedido()) {
 			Optional<Produto> optionalProdutoBD = produtoService.buscarProdutoPeloId(itemPedido.getCodigoProduto());
 			
 			if(optionalProdutoBD.isPresent()) {
+				
+				if(i == 0) {
+					comercioBd = comercioService.buscarComercioPeloId(optionalProdutoBD.get().getComercio().getId());
+					i++;
+				}
+				
 				Produto produtoBd = optionalProdutoBD.get();
 				
 				if(!produtoBd.getComercio().getId().equals(comercioBd.get().getId())) {
@@ -81,7 +84,7 @@ public class PedidoServiceImpl implements PedidoService{
 				}
 			}		
 		}
-		
+		pedido.setComercio(new Comercio(comercioBd.get().getId()));
 		pedido.setFrete(comercioBd.get().getValorEntrega());		
 		pedido.setTotal(pedido.getSubtotal() + comercioBd.get().getValorEntrega());
 		

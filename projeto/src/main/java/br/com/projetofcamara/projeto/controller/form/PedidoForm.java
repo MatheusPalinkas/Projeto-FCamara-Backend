@@ -1,12 +1,9 @@
 package br.com.projetofcamara.projeto.controller.form;
 
 import java.util.List;
-
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
 import br.com.projetofcamara.projeto.entity.Cliente;
-import br.com.projetofcamara.projeto.entity.Comercio;
 import br.com.projetofcamara.projeto.entity.Endereco;
 import br.com.projetofcamara.projeto.entity.ItemPedido;
 import br.com.projetofcamara.projeto.entity.Pedido;
@@ -18,8 +15,6 @@ public class PedidoForm {
 	private List<ItemPedido> itensPedido;
 	@NotNull @NotEmpty  
 	private String codigoCliente;	
-	@NotNull @NotEmpty  
-	private String codigoComercio;	
 	@NotNull @NotEmpty
 	private String codigoEndereco;
 	
@@ -28,13 +23,7 @@ public class PedidoForm {
 	}
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
-	}		
-	public String getCodigoComercio() {
-		return codigoComercio;
-	}
-	public void setCodigoComercio(String codigoComercio) {
-		this.codigoComercio = codigoComercio;
-	}
+	}	
 	public String getCodigoEndereco() {
 		return codigoEndereco;
 	}
@@ -58,7 +47,6 @@ public class PedidoForm {
 		Pedido pedido = new Pedido();
 		pedido.setCliente(new Cliente(codigoCliente));
 		pedido.setEndereco(new Endereco(codigoEndereco));
-		pedido.setComercio(new Comercio(codigoComercio));
 		pedido.setItensPedido(itensPedido);	
 		pedido.setObservacao(observacao);	
 	

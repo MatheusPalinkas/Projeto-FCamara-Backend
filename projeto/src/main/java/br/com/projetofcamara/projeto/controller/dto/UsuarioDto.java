@@ -31,6 +31,10 @@ public class UsuarioDto {
 		this.id = id;
 	}
 
+	public UsuarioDto() {
+		
+	}
+
 	public String getId() {
 		return id;
 	}

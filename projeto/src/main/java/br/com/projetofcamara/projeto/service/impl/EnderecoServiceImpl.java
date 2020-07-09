@@ -23,12 +23,14 @@ public class EnderecoServiceImpl implements EnderecoService{
 	ClienteService clienteService;
 		
 	@Override
-	public Optional<Endereco> criarEndereco(Endereco endereco) {
+	public Optional<Endereco> criarEndereco(Endereco endereco) {		
 		
-		Optional<Cliente> clienteBd = clienteService.buscarClientePeloId(endereco.getCodigoDetentor());
-		
-		if(!clienteBd.isPresent() &&  TipoDetentor.CLIENTE.equals(endereco.getDetentor())) {
-			throw new RegraDeNegocioException("Cliente inexistente");
+		if(TipoDetentor.CLIENTE.equals(endereco.getDetentor()) && !TipoDetentor.COMERCIO.equals(endereco.getDetentor())) {
+			Optional<Cliente> clienteBd = clienteService.buscarClientePeloId(endereco.getCodigoDetentor());
+			
+			if(!clienteBd.isPresent()) {
+				throw new RegraDeNegocioException("Cliente inexistente");
+			}				
 		}
 		
 		if(TipoDetentor.PRODUTO.equals(endereco.getDetentor()) ){

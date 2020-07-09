@@ -22,6 +22,10 @@ public class ComercioDto {
 	private boolean pagamentoDinheiro;
 	private CodigoNomeDto categoria;
 	private String codigoEndereco;
+	
+	public ComercioDto() {
+		
+	}
 		
 	public ComercioDto(Comercio comercio) {
 		this.id = comercio.getId();

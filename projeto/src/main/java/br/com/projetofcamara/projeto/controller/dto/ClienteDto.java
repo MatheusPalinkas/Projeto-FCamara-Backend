@@ -10,6 +10,10 @@ public class ClienteDto extends UsuarioDto{
 		
 	private List<Favorito> favoritos;
 	private List<Endereco> endereco;
+	
+	public ClienteDto() {
+		
+	}
 
 	public ClienteDto(Cliente cliente) {	
 		super((Usuario) cliente);
