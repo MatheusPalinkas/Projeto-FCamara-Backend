@@ -1,5 +1,6 @@
 package br.com.projetofcamara.projeto.entity;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import br.com.projetofcamara.projeto.enums.TipoUsuario;
 
@@ -7,8 +8,8 @@ import br.com.projetofcamara.projeto.enums.TipoUsuario;
 public class Vendedor extends Usuario{
 	
 	private static final long serialVersionUID = 1L;
-	
-	private String codigoComercio;	 	
+	@DBRef
+	private Comercio comercio;	 	
 	
 	public Vendedor() {
 		 this.tipoUsuario = TipoUsuario.VENDEDOR;
@@ -18,12 +19,11 @@ public class Vendedor extends Usuario{
 		this.id = id;
 	}
 
-	public String getCodigoComercio() {
-		return codigoComercio;
+	public Comercio getComercio() {
+		return comercio;
 	}
 
-	public void setCodigoComercio(String codigoComercio) {
-		this.codigoComercio = codigoComercio;
-	}
-
+	public void setComercio(Comercio comercio) {
+		this.comercio = comercio;
+	}	
 }

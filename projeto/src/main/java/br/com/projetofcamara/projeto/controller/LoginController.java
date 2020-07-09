@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.projetofcamara.projeto.config.security.TokenService;
 import br.com.projetofcamara.projeto.controller.dto.TokenDto;
 import br.com.projetofcamara.projeto.controller.dto.UsuarioDto;
+import br.com.projetofcamara.projeto.controller.dto.VendedorDto;
 import br.com.projetofcamara.projeto.controller.form.LoginForm;
 import br.com.projetofcamara.projeto.entity.Usuario;
+import br.com.projetofcamara.projeto.entity.Vendedor;
+import br.com.projetofcamara.projeto.enums.TipoUsuario;
 import br.com.projetofcamara.projeto.service.UsuarioService;
 
 @RestController
@@ -55,6 +58,9 @@ public class LoginController {
 		String idUsuario = tokenService.getIdUsuario(token.substring(7, token.length()));
 		Optional<Usuario> buscarUsuario = usuarioService.buscarUsuarioPeloId(idUsuario);
 		if(buscarUsuario.isPresent()) {
+			if(TipoUsuario.VENDEDOR.equals(buscarUsuario.get().getTipoUsuario())) {
+				return ResponseEntity.ok(new VendedorDto((Vendedor)buscarUsuario.get()));
+			}
 			return ResponseEntity.ok(new UsuarioDto(buscarUsuario.get()));
 		}
 		return ResponseEntity.notFound().build();

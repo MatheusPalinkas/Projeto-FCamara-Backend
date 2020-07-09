@@ -1,5 +1,6 @@
 package br.com.projetofcamara.projeto.controller.form;
 
+import br.com.projetofcamara.projeto.entity.Comercio;
 import br.com.projetofcamara.projeto.entity.Vendedor;
 
 public class VendedorForm extends UsuarioForm{
@@ -24,7 +25,7 @@ public class VendedorForm extends UsuarioForm{
 		vendedor.setCpf(cpf);
 		vendedor.setTelefone(telefone);	
 		vendedor.setUrlFoto(urlFoto);
-		vendedor.setCodigoComercio(codigoComercio);
+		vendedor.setComercio(new Comercio(codigoComercio));
 		
 		return vendedor;
 	}		
