@@ -1,10 +1,9 @@
 package br.com.projetofcamara.projeto.controller;
 
+import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,16 +30,16 @@ public class PedidoController {
 
 
 	@GetMapping("cliente/{idCliente}")
-	public Page<PedidoDto> listarPedidoCliente(@PathVariable String idCliente, Pageable paginacao) {
+	public List<PedidoDto> listarPedidoCliente(@PathVariable String idCliente) {
 		
-		Page<Pedido> pedido = pedidoService.listarPedidoCliente(idCliente, paginacao);
+		List<Pedido> pedido = pedidoService.listarPedidoCliente(idCliente);
 		return PedidoDto.converter(pedido);
 	}
 	
 	@GetMapping("comercio/{idComercio}")
-	public Page<PedidoDto> listarPedidoComercio(@PathVariable String idComercio, Pageable paginacao) {
+	public List<PedidoDto> listarPedidoComercio(@PathVariable String idComercio) {
 		
-		Page<Pedido> pedido = pedidoService.listarPedidoComercio(idComercio, paginacao);
+		List<Pedido> pedido = pedidoService.listarPedidoComercio(idComercio);
 		return PedidoDto.converter(pedido);
 	}
 	

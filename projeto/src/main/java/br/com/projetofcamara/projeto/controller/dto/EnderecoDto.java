@@ -18,6 +18,10 @@ public class EnderecoDto {
 	private String bairro;
 	private String uf;
 	private String complemento;
+	
+	public EnderecoDto() {
+		
+	}	
 		
 	public EnderecoDto(Endereco endereco) {
 		

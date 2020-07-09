@@ -41,7 +41,11 @@ public class ProdutoServiceImpl implements ProdutoService{
 		}
 		
 		if(!produto.isProdutoDemanda() && !produto.isProdutoEstoque()) {
-			throw new RegraDeNegocioException("É necessario selecionar uma das opções: Estoque ou Encomenda");
+			throw new RegraDeNegocioException("É necessario selecionar uma das opções: Estoque ou Encomenda/Demanda");
+		}
+		
+		if(produto.isProdutoDemanda() && produto.isProdutoEstoque()) {
+			throw new RegraDeNegocioException("Selecione somente UMA das opções: Estoque ou Encomenda/Demanda");
 		}
 		return Optional.ofNullable(produtoRepository.save(produto));
 	}

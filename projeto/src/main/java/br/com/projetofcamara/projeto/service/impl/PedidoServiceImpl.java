@@ -1,9 +1,8 @@
 package br.com.projetofcamara.projeto.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import br.com.projetofcamara.projeto.entity.Avaliacao;
 import br.com.projetofcamara.projeto.entity.Cliente;
@@ -107,13 +106,13 @@ public class PedidoServiceImpl implements PedidoService{
 	}
 	
 	@Override
-	public Page<Pedido> listarPedidoCliente(String idCliente, Pageable paginacao) {
-		return pedidoRepository.findByCliente(new Cliente(idCliente), paginacao);
+	public List<Pedido> listarPedidoCliente(String idCliente) {
+		return pedidoRepository.findByCliente(new Cliente(idCliente));
 	}
 
 	@Override
-	public Page<Pedido> listarPedidoComercio(String idComercio, Pageable paginacao) {		
-		return pedidoRepository.findByComercio(new Comercio(idComercio), paginacao);
+	public List<Pedido> listarPedidoComercio(String idComercio) {		
+		return pedidoRepository.findByComercio(new Comercio(idComercio));
 	}
 	
 	public Optional<Pedido> aceitaPedido(Pedido pedido){

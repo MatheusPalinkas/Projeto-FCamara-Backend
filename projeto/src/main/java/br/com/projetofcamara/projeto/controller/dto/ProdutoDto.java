@@ -34,11 +34,8 @@ public class ProdutoDto {
 		this.produtoEstoque = produto.isProdutoEstoque();
 		this.produtoDemanda = produto.isProdutoDemanda();
 		this.produtoDisponivel = produto.isProdutoDisponivel();
-		if(produto.getCategoria() != null)
-			this.categoria = new CodigoNomeDto(produto.getCategoria().getId(), produto.getCategoria().getNome());
-		
-		if(produto.getComercio() != null)
-			this.comercio = new CodigoNomeDto(produto.getComercio().getId(), produto.getComercio().getNome());		
+		this.categoria = new CodigoNomeDto(produto.getCategoria().getId(), produto.getCategoria().getNome());
+		this.comercio = new CodigoNomeDto(produto.getComercio().getId(), produto.getComercio().getNome());		
 	}
 
 	public String getId() {

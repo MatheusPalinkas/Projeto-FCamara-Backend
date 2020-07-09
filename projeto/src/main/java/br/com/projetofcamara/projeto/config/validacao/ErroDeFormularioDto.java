@@ -18,6 +18,8 @@ public class ErroDeFormularioDto {
 		return erro;
 	}
 	
-	
-
+	@Override
+	public String toString() {
+		return "{ campo = " + campo + " erro: " + erro + "}";
+	}
 }

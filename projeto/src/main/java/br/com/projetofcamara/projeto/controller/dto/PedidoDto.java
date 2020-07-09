@@ -2,7 +2,7 @@ package br.com.projetofcamara.projeto.controller.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import org.springframework.data.domain.Page;
+import java.util.stream.Collectors;
 import br.com.projetofcamara.projeto.entity.Avaliacao;
 import br.com.projetofcamara.projeto.entity.Cliente;
 import br.com.projetofcamara.projeto.entity.Comercio;
@@ -95,8 +95,8 @@ public class PedidoDto {
 		return cliente;
 	}
 	
-	public static Page<PedidoDto> converter(Page<Pedido> pedido) {
-		return pedido.map(PedidoDto::new);
+	public static List<PedidoDto> converter(List<Pedido> pedido) {		
+		return pedido.stream().map(PedidoDto::new).collect(Collectors.toList());
 	}	
 
 }

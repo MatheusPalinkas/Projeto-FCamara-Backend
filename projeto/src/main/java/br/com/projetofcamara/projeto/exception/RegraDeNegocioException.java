@@ -11,4 +11,8 @@ public class RegraDeNegocioException extends RuntimeException {
 	public RegraDeNegocioException(String mensagemErro, Throwable throwable) {
 		super(mensagemErro, throwable);
 	}
+	
+	public RegraDeNegocioException(String campo, String mensagemErro) {
+		super(campo + "-" + mensagemErro);
+	}
 }
