@@ -68,7 +68,7 @@ Iniciar a o projeto clicando no botão de *Debug*
 
 ## Outros links
 
-[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Projeto%20Fcamara&uri=https%3A%2F%2Fgithub.com%2FMatheusPalinkas%2FProjeto-FCamara%2Fblob%2Fmaster%2Fdocs%2Fdoc-rotas-insomnia.json)
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=ProjetoFCamara&uri=https%3A%2F%2Fraw.githubusercontent.com%2FMatheusPalinkas%2FProjeto-FCamara-Backend%2FDEV%2Fdocs%2Fdoc-rotas-insomnia.json)
 
 [Link para arquivos no drive](https://drive.google.com/drive/folders/17vXJTFi-uhJ_oOf2tmRV0r_MPpUXcZnn?usp=sharing)
 
