@@ -3,10 +3,8 @@ package br.com.projetofcamara.projeto.controller.dto;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import br.com.projetofcamara.projeto.entity.Avaliacao;
-import br.com.projetofcamara.projeto.entity.Cliente;
-import br.com.projetofcamara.projeto.entity.Comercio;
-import br.com.projetofcamara.projeto.entity.Endereco;
 import br.com.projetofcamara.projeto.entity.ItemPedido;
 import br.com.projetofcamara.projeto.entity.Pedido;
 import br.com.projetofcamara.projeto.enums.StatusPedido;
@@ -22,9 +20,9 @@ public class PedidoDto {
 	private StatusPedido statusPedido;
 	private Avaliacao avaliacaoDoCliente;
 	private Avaliacao avaliacaoDoComercio;
-	private Comercio comercio;
-	private Cliente cliente;
-	private Endereco endereco;
+	private ComercioDto comercio;
+	private ClienteDto cliente;
+	private EnderecoDto endereco;	
 	private List<ItemPedido> itensPedido;
 	
 	public PedidoDto(Pedido pedido) {
@@ -34,9 +32,9 @@ public class PedidoDto {
 		this.frete = pedido.getFrete();
 		this.subtotal = pedido.getSubtotal();
 		this.statusPedido = pedido.getStatusPedido();
-		this.cliente = pedido.getCliente();
-		this.comercio = pedido.getComercio();
-		this.endereco = pedido.getEndereco();
+		this.cliente = new ClienteDto(pedido.getCliente());
+		this.comercio = new ComercioDto(pedido.getComercio());
+		this.endereco = new EnderecoDto(pedido.getEndereco());
 		this.itensPedido = pedido.getItensPedido();
 		this.avaliacaoDoCliente = pedido.getAvaliacaoDoCliente();
 		this.avaliacaoDoComercio = pedido.getAvaliacaoDoComercio();
@@ -54,11 +52,7 @@ public class PedidoDto {
 	public StatusPedido getStatusPedido() {
 		return statusPedido;
 	}
-	
-	public Endereco getEndereco() {
-		return endereco;
-	}
-	
+
 	public double getTotal() {
 		return total;
 	}
@@ -86,14 +80,18 @@ public class PedidoDto {
 	public Avaliacao getAvaliacaoDoComercio() {
 		return avaliacaoDoComercio;
 	}	
-	
-	public Comercio getComercio() {
+		
+	public ComercioDto getComercio() {
 		return comercio;
 	}
 
-	public Cliente getCliente() {
+	public ClienteDto getCliente() {
 		return cliente;
 	}
+
+	public EnderecoDto getEndereco() {
+		return endereco;
+	}	
 	
 	public static List<PedidoDto> converter(List<Pedido> pedido) {		
 		return pedido.stream().map(PedidoDto::new).collect(Collectors.toList());

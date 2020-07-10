@@ -1,14 +1,27 @@
 package br.com.projetofcamara.projeto.entity;
 
+import br.com.projetofcamara.projeto.controller.dto.ProdutoDto;
+import br.com.projetofcamara.projeto.controller.form.ItemPedidoForm;
+
 public class ItemPedido {
 	
-	private String codigoProduto;	
+	private ProdutoDto produto;	
 	private int quantidade;
 	private String observacao;
 	private double valorProduto;
 
+	public ItemPedido() {
+	}
+	
+	public ItemPedido(ItemPedidoForm itemPedidoForm) {
+		this.produto = new ProdutoDto(itemPedidoForm.getCodigoProduto());
+		this.quantidade = itemPedidoForm.getQuantidade();
+		this.observacao = itemPedidoForm.getObservacao();
+		this.valorProduto = itemPedidoForm.getValorProduto();
+	}
+	
 	public ItemPedido(String codigoProduto, int quantidade, String observacao, double valorProduto) {
-		this.codigoProduto = codigoProduto;
+		this.produto = new ProdutoDto(codigoProduto);
 		this.quantidade = quantidade;
 		this.observacao = observacao;
 		this.valorProduto = valorProduto;
@@ -20,8 +33,11 @@ public class ItemPedido {
 	public String getObservacao() {
 		return observacao;
 	}
-	public String getCodigoProduto() {
-		return codigoProduto;
+	public ProdutoDto getProduto() {
+		return produto;
+	}
+	public void setProduto(ProdutoDto produto) {
+		this.produto = produto;
 	}
 	public double getValorProduto() {
 		return valorProduto;

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import br.com.projetofcamara.projeto.controller.dto.ProdutoDto;
 import br.com.projetofcamara.projeto.entity.Avaliacao;
 import br.com.projetofcamara.projeto.entity.Cliente;
 import br.com.projetofcamara.projeto.entity.Comercio;
@@ -55,7 +57,7 @@ public class PedidoServiceImpl implements PedidoService{
 		}		
 		int i = 0;
 		for (ItemPedido itemPedido : pedido.getItensPedido()) {
-			Optional<Produto> optionalProdutoBD = produtoService.buscarProdutoPeloId(itemPedido.getCodigoProduto());
+			Optional<Produto> optionalProdutoBD = produtoService.buscarProdutoPeloId(itemPedido.getProduto().getId());
 			
 			if(optionalProdutoBD.isPresent()) {
 				
@@ -78,12 +80,14 @@ public class PedidoServiceImpl implements PedidoService{
 					if(produtoBd.getQuantidade() - itemPedido.getQuantidade() < 0 || !produtoBd.isProdutoDisponivel()) {
 						throw new RegraDeNegocioException("Produto sem estoque ou não possui a quantidade desejada");
 					}
+					itemPedido.setProduto(new ProdutoDto(produtoBd));
+					
 					calculaSubtotalPedido(pedido, itemPedido, produtoBd);
 					subtraiQuantidadeProdutoEstoque(itemPedido, produtoBd);
 				}
 			}		
 		}
-		pedido.setComercio(new Comercio(comercioBd.get().getId()));
+		pedido.setComercio(comercioBd.get());
 		pedido.setFrete(comercioBd.get().getValorEntrega());		
 		pedido.setTotal(pedido.getSubtotal() + comercioBd.get().getValorEntrega());
 		
@@ -126,13 +130,13 @@ public class PedidoServiceImpl implements PedidoService{
 		return Optional.ofNullable(pedidoRepository.save(pedidoBd.get()));			
 	}	
 
-	public Optional<Pedido> negarPedido(Pedido pedido){
+	public Optional<Pedido> negarCancelarPedido(Pedido pedido){
 		
 		Optional<Pedido> pedidoBd = pedidoRepository.findById(pedido.getId());
 		if(pedidoBd.isPresent() && StatusPedido.PENDENTE.equals( pedidoBd.get().getStatusPedido() )) {
 			pedidoBd.get().setStatusPedido(pedido.getStatusPedido());			
 		}else {
-			throw new RegraDeNegocioException("Pedido só pode ser negado se estiver pendente");
+			throw new RegraDeNegocioException("Pedido só pode ser negado/cancelado se estiver pendente");
 		}
 		return Optional.ofNullable(pedidoRepository.save(pedidoBd.get()));					
 	}
@@ -157,8 +161,8 @@ public class PedidoServiceImpl implements PedidoService{
 			throw new RegraDeNegocioException("Pedido só pode estar com status entregue se foi enviado");
 		}
 		return Optional.ofNullable(pedidoRepository.save(pedidoBd.get()));			
-	}
-
+	}		
+	
 	@Override
 	public Optional<Pedido> criarAvaliacao(Avaliacao avaliaPedido, String avaliado, String idPedido) {
 		
@@ -196,5 +200,6 @@ public class PedidoServiceImpl implements PedidoService{
 		}
 				
 		return Optional.ofNullable(pedidoRepository.save(pedidoBd.get()));
-	}		 
+	}
+	
 }

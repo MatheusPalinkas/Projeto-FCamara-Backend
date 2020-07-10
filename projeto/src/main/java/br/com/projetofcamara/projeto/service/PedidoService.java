@@ -17,12 +17,12 @@ public interface PedidoService {
 	
 	Optional<Pedido> aceitaPedido(Pedido pedido);
 	
-	Optional<Pedido> negarPedido(Pedido pedido);
+	Optional<Pedido> negarCancelarPedido(Pedido pedido);
 	
 	Optional<Pedido> enviarPedido(Pedido pedido);
 	
 	Optional<Pedido> entregarPedido(Pedido pedido);
 
-	Optional<Pedido> criarAvaliacao(Avaliacao avaliaPedido, String avaliado, String idPedido);
+	Optional<Pedido> criarAvaliacao(Avaliacao avaliaPedido, String avaliado, String idPedido);	
 		
 }

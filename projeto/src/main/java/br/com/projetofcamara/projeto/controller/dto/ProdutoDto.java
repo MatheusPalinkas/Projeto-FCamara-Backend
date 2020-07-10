@@ -23,6 +23,10 @@ public class ProdutoDto {
 		
 	}
 	
+	public ProdutoDto(String id) {
+		this.id = id;
+	}
+	
 	public ProdutoDto(Produto produto) {
 		this.id = produto.getId();
 		this.nome = produto.getNome();

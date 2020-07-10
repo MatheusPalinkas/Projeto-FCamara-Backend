@@ -65,11 +65,14 @@ public class PedidoController {
 		pedido.setStatusPedido(StatusPedido.getEnumByText(status));				
 		
 		switch (pedido.getStatusPedido()) {
+			case CANCELADO:
+				pedidoBd = pedidoService.negarCancelarPedido(pedido);
+				break;
 			case ACEITO:
 				pedidoBd = pedidoService.aceitaPedido(pedido);
 				break;
 			case NEGADO:
-				pedidoBd = pedidoService.negarPedido(pedido);
+				pedidoBd = pedidoService.negarCancelarPedido(pedido);
 				break;
 			case ENVIADO:
 				pedidoBd = pedidoService.enviarPedido(pedido);
